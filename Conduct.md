@@ -24,8 +24,16 @@ community include:
 * Accepting responsibility and apologizing to those affected by our mistakes,
   and learning from the experience
 * Focusing on what is best not just for us as individuals, but for the overall
-  community
-
+  Community
+* No distracted use of technology (e.g. phones away) during all team meetings.
+* Consensus / voting on major decisions, tie breaker is Prod. Manager
+* Try to be flexible, do the majority of work when we are guaranteed to meet (in classes/ on campus)
+*Split work evenly, try to keep posted with other members to track their progress on their work.. If they miss the due date, as long as there is a reasonable excuse provided, it can be done within the next 2 days.
+*Meeting days are as follows: Mondays: Emergency Meeting day (ideally before 4pm) Tues & Thurs - Weekly meetings - starts at 9:30, ends at 9:50, meets at Library (times and location may be changed, check group chat for info)
+*Meetings will not be extensively documented unless necessary- small summaries of the meeting with be provided in the groupchat
+*We will all try to be on time and if you're late more often we will bring that up in a meeting. 
+*We will be open minded and courteous of common conversational practices
+*To enforce these rules we will hold each other accountable.
 Examples of unacceptable behavior include:
 
 * The use of sexualized language or imagery, and sexual attention or advances of
@@ -61,7 +69,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-[INSERT CONTACT METHOD].
+uricsc305@gmail.com.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
@@ -131,3 +139,5 @@ For answers to common questions about this code of conduct, see the FAQ at
 [Mozilla CoC]: https://github.com/mozilla/diversity
 [FAQ]: https://www.contributor-covenant.org/faq
 [translations]: https://www.contributor-covenant.org/translations
+
+
