@@ -6,3 +6,7 @@
   - Many users want easy to implement UI features that make the process of seeing and interacting with a calendar easier.
   - 5 of 15  responded with a UI feature they want implemented when asked about what they would want out of a calendar app
   - Implement each UI suggestion
+* Observation 4:
+  - The majority of people who use a calendar use it to keep track of appointments (82%), birthdays (73%), and events (70%).
+  - Less than half of users use a calendar to keep track of holidays.
+  - More than 90% of people that use a calendar use an app, which is most likely a result from the majority of responses being   from people aged 18 - 25.
