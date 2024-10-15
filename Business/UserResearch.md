@@ -6,6 +6,10 @@
   - Many users want easy to implement UI features that make the process of seeing and interacting with a calendar easier.
   - 5 of 15  responded with a UI feature they want implemented when asked about what they would want out of a calendar app
   - Implement each UI suggestion
+* Observation 3:
+  - Most of our respondents work a lot during the week which can conflict with scheduling other events. 
+  - Over 57% of our responses include people who work over 20+ Hours a week and over 82% working at least 10-15 hours a week.
+  - Create a user-friendly UI that is time efficient for users to easily add events to the calendar.
 * Observation 4:
   - The majority of people who use a calendar use it to keep track of appointments (82%), birthdays (73%), and events (70%).
   - Less than half of users use a calendar to keep track of holidays.
