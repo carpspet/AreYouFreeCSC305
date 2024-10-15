@@ -10,3 +10,7 @@
   - Most of our respondents work a lot during the week which can conflict with scheduling other events. 
   - Over 57% of our responses include people who work over 20+ Hours a week and over 82% working at least 10-15 hours a week.
   - Create a user-friendly UI that is time efficient for users to easily add events to the calendar.
+* Observation 4:
+  - The majority of people who use a calendar use it to keep track of appointments (82%), birthdays (73%), and events (70%).
+  - Less than half of users use a calendar to keep track of holidays.
+  - More than 90% of people that use a calendar use an app, which is most likely a result from the majority of responses being   from people aged 18 - 25.
