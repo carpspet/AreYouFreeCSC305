@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "307576316949",
+    "project_id": "areyoufreecsc305",
+    "storage_bucket": "areyoufreecsc305.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307576316949:android:08613cccec05c2089ada1c",
+        "android_client_info": {
+          "package_name": "com.mycompany.areyoufreecsc305"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307576316949-2rpu3bl1s8spqhc7lun8vls3o76l0r2q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.areyoufreecsc305",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "307576316949-7jcivmfdmokrootdor6lmnhougmqqj7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO17_Omypj5Z-Bi-HjoeT1kXwjCmpD690"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307576316949-7jcivmfdmokrootdor6lmnhougmqqj7k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "307576316949-s7q24pnohh7jrgd8ob8guh2lkepq7qan.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.areyoufreecsc305"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
