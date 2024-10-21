@@ -1,3 +1,7 @@
 # AreYouFreeCSC305
-CSC305 Project created by Jad Alsassa, Kamden Ashmore, Nick Rapoza [insert other group member here]
 
+A new Flutter project.
+
+## Getting Started
+
+FlutterFlow projects are built to run on the Flutter _stable_ release.
