@@ -1,6 +1,8 @@
 HEART Framework link: https://docs.google.com/presentation/d/13-iKmA1yd9ZLfNA-cSWpkgm0vclyl1A-mE4lcZTV660/edit?usp=sharing 
 
 * NPS
+  * We will provide a path to the app store for the user to leave a review out of 5 stars for the app.
+  * Offer a limited theme that is granted once you complete the review.
 * Adoption
   * Number of app downloads
   * Number of friends, shared events, or number of events created
