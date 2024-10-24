@@ -2,6 +2,7 @@ HEART Framework link: https://docs.google.com/presentation/d/13-iKmA1yd9ZLfNA-cS
 
 * NPS
 * Adoption
+* * Number of app downloads
 * DAU
 * Retention 
 * CTR for an event on the Golden Path. This is done with Firebase Analytics custom event.
