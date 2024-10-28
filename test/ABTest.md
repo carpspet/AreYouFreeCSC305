@@ -5,7 +5,7 @@
 - What problem are we trying to solve?: We are trying to make sure our sign up is as painless as possible so that users can start to use the app as quick as possible.
 - Experiment - We will ask if the user was satified with their sign up experience with our google survey
   - Describe the audiences.
-     – we will allocate 50% of the users to each category
+    - we will allocate 50% of the users to each category
   - Describe the tracking using Firebase Analytics. 
     - we will be mainly using google survey for this A/B Test
 - Variations - We would like to shorten the logon page to a single packed page to see if users prefer that expeience instead of a cleaner multi page approach.
