@@ -15,3 +15,5 @@ HEART Framework link: https://docs.google.com/presentation/d/13-iKmA1yd9ZLfNA-cS
   * Track events to monitor specific features that encourage retention like adding events or syncing calendars.
   * We will track the retention rate by measuring percentage of users who come back to the app within 1 day, 7 days, and 30 days after their first session.
 * CTR for an event on the Golden Path. This is done with Firebase Analytics custom event.
+  * Firebase analytics with tell us how many times a user interacts with something on our golden path, be it a button, event, or something else
+  * We can compare the CTR (the Click Through Rate) with how many times users were given the opportunity to click something (an impression)
