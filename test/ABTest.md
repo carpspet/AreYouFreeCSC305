@@ -9,3 +9,19 @@
   - Describe the tracking using Firebase Analytics. 
     - we will be mainly using google survey for this A/B Test
 - Variations - We would like to shorten the logon page to a single packed page to see if users prefer that expeience instead of a cleaner multi page approach.
+
+-A/B Test Name:  Calendar Entry Options - Single Button vs. Dual Button Interface
+- User Story Number: US4 Golden Path
+- Metrics:   User Satisfaction Score (via Google survey), Conversion Rate (via Firebase Analytics)
+- Hypothesis: Providing users with both a Google Calendar link button and a manual entry button will improve user satisfaction by offering flexibility, but a single button (manual entry only) may increase simplicity and ease of use..
+- What problem are we trying to solve?:  We aim to streamline the calendar entry process, minimizing friction so users can connect their calendars quickly and intuitively, enhancing overall usability.
+- Experiment - We will survey users on their satisfaction with the calendar setup process, assessing whether they felt it was straightforward and whether they used the provided options.
+  - Describe the audiences.
+    - we will allocate 50% of the users to each category
+  - Describe the tracking using Firebase Analytics. 
+    - Event Tracking: Set up Firebase events to track the button clicks for each option.
+    - Conversion Tracking: Measure successful calendar integrations (e.g., successful Google Calendar connection or manual event save).
+- Variations
+    - Variation A: Interface with two buttons, offering Google Calendar linking and manual entry.
+    - Variation B: Interface with a single button, providing manual entry only, aiming to simplify and focus the user’s choices.
+
