@@ -25,3 +25,17 @@
     - Variation A: Interface with two buttons, offering Google Calendar linking and manual entry.
     - Variation B: Interface with a single button, providing manual entry only, aiming to simplify and focus the user’s choices.
 
+-A/B Test Name: Light Mode vs. Dark Mode UI + Themes
+- User Story Number: US4 Golden Path
+- Metrics: User Satisfaction Score (Survey Results), Feature Adoption (Analytics)
+- Hypothesis: Offering a choice between light mode and dark mode or a darker theme will increase user satisfaction and engagement, as users will feel more in control of their experience. Dark mode may improve usability in low-light conditions, while light mode could be preferred in well-lit environments.
+What problem are we trying to solve?: We are aiming to determine whether giving users the ability to customize their UI theme leads to a more satisfying user experience and increased engagement with the app. 
+- Experiment - We will survey users to see if they are happy with the UI design and color scheme. We can also track how many people in the B group are using the theme feature.
+  - Describe the audiences:
+    - We will allocate 50% of users to only light mode and 50% to a theme toggle between light and dark mode or choose a custom theme color.
+  - Describe the tracking using Firebase Analytics:
+    - Use Firebase to track which theme users select and how often they switch between light and dark modes along with the custom themes.
+    - Track theme preference and analyze if allowing theme customization leads to higher satisfaction and app usage.
+- Variations:
+  - Variation A: Users only have access to light mode.
+  - Variation B: Users can toggle between light and dark modes or select a custom theme.
