@@ -39,3 +39,14 @@ What problem are we trying to solve?: We are aiming to determine whether giving 
 - Variations:
   - Variation A: Users only have access to light mode.
   - Variation B: Users can toggle between light and dark modes or select a custom theme.
+
+- User Story Number: User Login - Password Reset: Email vs Autherntication Number
+- Metrics: Survey Results
+- Hypothesis: Users who can reset their password by email confirmation will find the process easier and more efficient, leading to higher satisfaction with the overall password reset experience.
+- What problem are we trying to solve?: Users who forget their password may face difficulty with the current reset process. By adding an email confirmation option, we aim to streamline the process, reducing frustration and improving user satisfaction.
+- Experiment: We will ask users if they were satisfied with their sign-up/reset experience using a Google survey, which will be linked immediately after completing the password reset process.
+- Describe the audiences: Group A: Users who are asked to confirm their email to reset their password. Group B: Users who reset their password by entering the authentication number they are given when creating their account. Both groups will be randomly assigned and asked for feedback on their experience.
+- Describe the tracking using Firebase Analytics: We'll track user interactions with the reset flow using Firebase Analytics, such as the number of reset attempts, completion rates, and survey participation. Google survey - results will give qualitative insights into user satisfaction and pain points.
+- Variations:
+- Variation A: Users reset their password by confirming their email.
+- Variation B: Users reset their password by confirming their authenication number
