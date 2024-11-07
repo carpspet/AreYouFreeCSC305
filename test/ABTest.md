@@ -1,0 +1,52 @@
+-A/B Test Name:  Sign in screen split between 2 different pages compared to a single page
+- User Story Number: US1 Account Creation
+- Metrics:  NPM Score
+- Hypothesis: Having 2 screens that look cleaner will be better than 1 packed screen.
+- What problem are we trying to solve?: We are trying to make sure our sign up is as painless as possible so that users can start to use the app as quick as possible.
+- Experiment - We will ask if the user was satified with their sign up experience with our google survey
+  - Describe the audiences.
+    - we will allocate 50% of the users to each category
+  - Describe the tracking using Firebase Analytics. 
+    - we will be mainly using google survey for this A/B Test
+- Variations - We would like to shorten the logon page to a single packed page to see if users prefer that expeience instead of a cleaner multi page approach.
+
+-A/B Test Name:  Calendar Entry Options - Single Button vs. Dual Button Interface
+- User Story Number: US4 Golden Path
+- Metrics:   User Satisfaction Score (via Google survey), Conversion Rate (via Firebase Analytics)
+- Hypothesis: Providing users with both a Google Calendar link button and a manual entry button will improve user satisfaction by offering flexibility, but a single button (manual entry only) may increase simplicity and ease of use..
+- What problem are we trying to solve?:  We aim to streamline the calendar entry process, minimizing friction so users can connect their calendars quickly and intuitively, enhancing overall usability.
+- Experiment - We will survey users on their satisfaction with the calendar setup process, assessing whether they felt it was straightforward and whether they used the provided options.
+  - Describe the audiences.
+    - we will allocate 50% of the users to each category
+  - Describe the tracking using Firebase Analytics. 
+    - Event Tracking: Set up Firebase events to track the button clicks for each option.
+    - Conversion Tracking: Measure successful calendar integrations (e.g., successful Google Calendar connection or manual event save).
+- Variations
+    - Variation A: Interface with two buttons, offering Google Calendar linking and manual entry.
+    - Variation B: Interface with a single button, providing manual entry only, aiming to simplify and focus the user’s choices.
+
+-A/B Test Name: Light Mode vs. Dark Mode UI + Themes
+- User Story Number: US4 Golden Path
+- Metrics: User Satisfaction Score (Survey Results), Feature Adoption (Analytics)
+- Hypothesis: Offering a choice between light mode and dark mode or a darker theme will increase user satisfaction and engagement, as users will feel more in control of their experience. Dark mode may improve usability in low-light conditions, while light mode could be preferred in well-lit environments.
+What problem are we trying to solve?: We are aiming to determine whether giving users the ability to customize their UI theme leads to a more satisfying user experience and increased engagement with the app. 
+- Experiment - We will survey users to see if they are happy with the UI design and color scheme. We can also track how many people in the B group are using the theme feature.
+  - Describe the audiences:
+    - We will allocate 50% of users to only light mode and 50% to a theme toggle between light and dark mode or choose a custom theme color.
+  - Describe the tracking using Firebase Analytics:
+    - Use Firebase to track which theme users select and how often they switch between light and dark modes along with the custom themes.
+    - Track theme preference and analyze if allowing theme customization leads to higher satisfaction and app usage.
+- Variations:
+  - Variation A: Users only have access to light mode.
+  - Variation B: Users can toggle between light and dark modes or select a custom theme.
+
+-A/B Test User Login US2 - Password Reset: Email vs Autherntication Number
+- Metrics: Survey Results
+- Hypothesis: Users who can reset their password by email confirmation will find the process easier and more efficient, leading to higher satisfaction with the overall password reset experience.
+- What problem are we trying to solve?: Users who forget their password may face difficulty with the current reset process. By adding an email confirmation option, we aim to streamline the process, reducing frustration and improving user satisfaction.
+- Experiment: We will ask users if they were satisfied with their sign-up/reset experience using a Google survey, which will be linked immediately after completing the password reset process.
+  - Describe the audiences: Group A: Users who are asked to confirm their email to reset their password. Group B: Users who reset their password by entering the authentication number they are given when creating their account. Both groups will be randomly assigned and asked for feedback on their experience.
+  - Describe the tracking using Firebase Analytics: We'll track user interactions with the reset flow using Firebase Analytics, such as the number of reset attempts, completion rates, and survey participation. Google survey - results will give qualitative insights into user satisfaction and pain points.
+- Variations:
+  - Variation A: Users reset their password by confirming their email.
+  - Variation B: Users reset their password by confirming their authenication number
