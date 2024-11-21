@@ -7,7 +7,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:are_you_free_c_s_c305/main.dart';
+import 'package:are_you_free_c_s_c305_second_ver/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

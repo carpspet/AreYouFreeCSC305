@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "1047363104597",
+    "project_id": "are-you-free-c-s-c305-00m51j",
+    "storage_bucket": "are-you-free-c-s-c305-00m51j.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047363104597:android:9fb1a2ef915d881b1e49dc",
+        "android_client_info": {
+          "package_name": "com.mycompany.areyoufreecsc305"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047363104597-03abkvqkp0jdb134k2m0105dpt41k1ch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbUpURUJ3105OX-Xx25fylo_fhiAD8SHo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047363104597-03abkvqkp0jdb134k2m0105dpt41k1ch.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1047363104597-hrhmvkr7u8jecsi5drroi5p77svma5mc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.areyoufreecsc305"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047363104597:android:7c7dfbcd8cf328101e49dc",
+        "android_client_info": {
+          "package_name": "com.uricsc305.AreYouFree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047363104597-22pfldk2dbvpv2sdfap8k7i5vuvt48iu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uricsc305.AreYouFree",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1047363104597-03abkvqkp0jdb134k2m0105dpt41k1ch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbUpURUJ3105OX-Xx25fylo_fhiAD8SHo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047363104597-03abkvqkp0jdb134k2m0105dpt41k1ch.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1047363104597-hrhmvkr7u8jecsi5drroi5p77svma5mc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.areyoufreecsc305"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
