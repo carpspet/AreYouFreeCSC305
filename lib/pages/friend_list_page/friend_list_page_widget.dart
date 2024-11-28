@@ -30,9 +30,7 @@ class _FriendListPageWidgetState extends State<FriendListPageWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       FFAppState().userFriendsList =
-          (currentUserDocument?.friendsList.toList() ?? [])
-              .toList()
-              .cast<String>();
+          FFAppState().userFriendsList.toList().cast<String>();
       safeSetState(() {});
     });
 
@@ -133,6 +131,8 @@ class _FriendListPageWidgetState extends State<FriendListPageWidget> {
                                                       },
                                                     ),
                                                   });
+
+                                                  safeSetState(() {});
                                                 },
                                               ),
                                             ],
@@ -153,49 +153,41 @@ class _FriendListPageWidgetState extends State<FriendListPageWidget> {
               ),
               Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      'Friends',
-                      style: FlutterFlowTheme.of(context).titleLarge.override(
-                            fontFamily: 'Lato',
-                            letterSpacing: 0.0,
-                          ),
-                    ),
+                  Text(
+                    'Friends',
+                    style: FlutterFlowTheme.of(context).displaySmall.override(
+                          fontFamily: 'Lato',
+                          letterSpacing: 0.0,
+                        ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(198.0, 0.0, 0.0, 0.0),
-                    child: FlutterFlowIconButton(
-                      borderRadius: 8.0,
-                      buttonSize: 40.0,
-                      fillColor: FlutterFlowTheme.of(context).primary,
-                      icon: Icon(
-                        Icons.group_add,
-                        color: FlutterFlowTheme.of(context).info,
-                        size: 24.0,
-                      ),
-                      onPressed: () async {
-                        await showModalBottomSheet(
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          enableDrag: false,
-                          context: context,
-                          builder: (context) {
-                            return GestureDetector(
-                              onTap: () => FocusScope.of(context).unfocus(),
-                              child: Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: const FriendRequestsCompWidget(),
-                              ),
-                            );
-                          },
-                        ).then((value) => safeSetState(() {}));
-                      },
+                  FlutterFlowIconButton(
+                    borderRadius: 8.0,
+                    buttonSize: 40.0,
+                    fillColor: FlutterFlowTheme.of(context).primary,
+                    icon: Icon(
+                      Icons.group_add,
+                      color: FlutterFlowTheme.of(context).info,
+                      size: 24.0,
                     ),
+                    onPressed: () async {
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return GestureDetector(
+                            onTap: () => FocusScope.of(context).unfocus(),
+                            child: Padding(
+                              padding: MediaQuery.viewInsetsOf(context),
+                              child: const FriendRequestsCompWidget(),
+                            ),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
+                    },
                   ),
                 ],
               ),

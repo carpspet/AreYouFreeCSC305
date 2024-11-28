@@ -4,7 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EditEventModel extends FlutterFlowModel<EditEventWidget> {
-  ///  State fields for stateful widgets in this component.
+  ///  Local state fields for this page.
+
+  bool editingMode = true;
+
+  ///  State fields for stateful widgets in this page.
 
   // State field(s) for EventName widget.
   FocusNode? eventNameFocusNode;

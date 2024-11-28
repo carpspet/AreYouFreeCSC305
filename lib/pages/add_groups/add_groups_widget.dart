@@ -154,30 +154,27 @@ class _AddGroupsWidgetState extends State<AddGroupsWidget> {
                   padding: const EdgeInsets.all(24.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      var groupsRecordReference = GroupsRecord.collection.doc();
-                      await groupsRecordReference.set(createGroupsRecordData(
-                        groupName: _model.userGroupTextTextController.text,
-                      ));
-                      _model.allGroups = GroupsRecord.getDocumentFromData(
-                          createGroupsRecordData(
-                            groupName: _model.userGroupTextTextController.text,
-                          ),
-                          groupsRecordReference);
-                      if (_model.allGroups?.groupName ==
+                      _model.groupOutput = await queryGroupsRecordOnce(
+                        queryBuilder: (groupsRecord) => groupsRecord.where(
+                          'GroupName',
+                          isEqualTo: _model.userGroupTextTextController.text,
+                        ),
+                        singleRecord: true,
+                      ).then((s) => s.firstOrNull);
+                      if (_model.groupOutput?.groupName ==
                           _model.userGroupTextTextController.text) {
-                        await _model.allGroups!.reference.update({
+                        await _model.groupOutput!.reference.update({
                           ...mapToFirestore(
                             {
-                              'UserInGroup':
-                                  FieldValue.arrayUnion([currentUserUid]),
+                              'UserInGroup': FieldValue.arrayUnion(
+                                  [currentUserDisplayName]),
                             },
                           ),
                         });
-                      } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'Error: could not find group. Please check uour spelling.',
+                              'Sucess!',
                               style: TextStyle(
                                 color: FlutterFlowTheme.of(context).primaryText,
                               ),
@@ -185,6 +182,19 @@ class _AddGroupsWidgetState extends State<AddGroupsWidget> {
                             duration: const Duration(milliseconds: 4000),
                             backgroundColor:
                                 FlutterFlowTheme.of(context).secondary,
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Group name does not exist. Please check your spelling',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: const Duration(milliseconds: 4000),
+                            backgroundColor: FlutterFlowTheme.of(context).error,
                           ),
                         );
                       }
@@ -316,7 +326,7 @@ class _AddGroupsWidgetState extends State<AddGroupsWidget> {
                           ),
                           ...mapToFirestore(
                             {
-                              'UserInGroup': [currentUserDisplayName],
+                              'UserInGroup': [currentUserUid],
                             },
                           ),
                         });

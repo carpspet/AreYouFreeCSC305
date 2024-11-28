@@ -67,18 +67,47 @@ class _FriendRequestsCompWidgetState extends State<FriendRequestsCompWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 8.0),
-                child: Text(
-                  'Friend Requests ',
-                  style: FlutterFlowTheme.of(context).bodyLarge.override(
-                        fontFamily: 'Plus Jakarta Sans',
-                        color: const Color(0xFF14181B),
-                        fontSize: 16.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.w500,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: const AlignmentDirectional(-1.0, -1.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Text(
+                        'Friend Requests',
+                        style: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .override(
+                              fontFamily: 'Lato',
+                              letterSpacing: 0.0,
+                            ),
                       ),
-                ),
+                    ),
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(0.0, -1.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: FlutterFlowIconButton(
+                        borderColor: const Color(0xFFFF0D00),
+                        borderRadius: 8.0,
+                        buttonSize: 40.0,
+                        fillColor:
+                            FlutterFlowTheme.of(context).primaryBackground,
+                        icon: Icon(
+                          Icons.close,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const Divider(
                 thickness: 1.0,
@@ -235,21 +264,28 @@ class _FriendRequestsCompWidgetState extends State<FriendRequestsCompWidget> {
                             },
                             text: 'Send Friend Request',
                             options: FFButtonOptions(
-                              height: 40.0,
+                              width: 200.0,
+                              height: 50.0,
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).primary,
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Lato',
-                                    color: Colors.white,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     letterSpacing: 0.0,
                                   ),
                               elevation: 0.0,
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderSide: const BorderSide(
+                                color: Color(0x6439D2C0),
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
                             ),
                           ),
                         ),

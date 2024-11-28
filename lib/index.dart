@@ -10,3 +10,6 @@ export '/test/test_widget.dart' show TestWidget;
 export '/pages/friend_list_page/friend_list_page_widget.dart'
     show FriendListPageWidget;
 export '/pages/add_groups/add_groups_widget.dart' show AddGroupsWidget;
+export '/edit_event/edit_event_widget.dart' show EditEventWidget;
+export '/edit_event_test/edit_event_test_widget.dart' show EditEventTestWidget;
+export '/edit_event_copy/edit_event_copy_widget.dart' show EditEventCopyWidget;

@@ -217,8 +217,7 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
                                             ),
-                                    indicatorColor:
-                                        FlutterFlowTheme.of(context).primary,
+                                    indicatorColor: const Color(0xCFA839EF),
                                     indicatorWeight: 4.0,
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 12.0, 16.0, 12.0),
@@ -299,10 +298,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                               ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
+                                                        borderSide: const BorderSide(
+                                                          color:
+                                                              Color(0xCFA839EF),
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -404,10 +402,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                               ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
+                                                        borderSide: const BorderSide(
+                                                          color:
+                                                              Color(0xCFA839EF),
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -548,10 +545,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                                   0.0,
                                                                   0.0,
                                                                   0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -559,16 +555,17 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lato',
-                                                                color: Colors
-                                                                    .white,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
                                                       elevation: 3.0,
                                                       borderSide: const BorderSide(
                                                         color:
-                                                            Colors.transparent,
-                                                        width: 1.0,
+                                                            Color(0xCFA839EF),
+                                                        width: 2.0,
                                                       ),
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -791,10 +788,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                                     ),
                                                                 elevation: 0.0,
                                                                 borderSide:
-                                                                    BorderSide(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .alternate,
+                                                                    const BorderSide(
+                                                                  color: Color(
+                                                                      0xCFA839EF),
                                                                   width: 2.0,
                                                                 ),
                                                                 borderRadius:
@@ -875,10 +871,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                               ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
+                                                        borderSide: const BorderSide(
+                                                          color:
+                                                              Color(0xCFA839EF),
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -978,10 +973,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                               ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
+                                                        borderSide: const BorderSide(
+                                                          color:
+                                                              Color(0xCFA839EF),
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -1103,10 +1097,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                               ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .alternate,
+                                                        borderSide: const BorderSide(
+                                                          color:
+                                                              Color(0xCFA839EF),
                                                           width: 2.0,
                                                         ),
                                                         borderRadius:
@@ -1262,10 +1255,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                                   0.0,
                                                                   0.0,
                                                                   0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -1273,16 +1265,17 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lato',
-                                                                color: Colors
-                                                                    .white,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryText,
                                                                 letterSpacing:
                                                                     0.0,
                                                               ),
                                                       elevation: 3.0,
                                                       borderSide: const BorderSide(
                                                         color:
-                                                            Colors.transparent,
-                                                        width: 1.0,
+                                                            Color(0xCFA839EF),
+                                                        width: 2.0,
                                                       ),
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -1424,10 +1417,9 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                                                     ),
                                                                 elevation: 0.0,
                                                                 borderSide:
-                                                                    BorderSide(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
+                                                                    const BorderSide(
+                                                                  color: Color(
+                                                                      0xCFA839EF),
                                                                   width: 2.0,
                                                                 ),
                                                                 borderRadius:

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -137,6 +138,41 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'AddGroups')
               : const AddGroupsWidget(),
+        ),
+        FFRoute(
+          name: 'editEvent',
+          path: '/editEvent',
+          asyncParams: {
+            'eventID':
+                getDoc(['appointments'], AppointmentsRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditEventWidget(
+            eventID: params.getParam(
+              'eventID',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'editEventTest',
+          path: '/editEventTest',
+          builder: (context, params) => const EditEventTestWidget(),
+        ),
+        FFRoute(
+          name: 'editEventCopy',
+          path: '/editEventCopy',
+          asyncParams: {
+            'eventID':
+                getDoc(['appointments'], AppointmentsRecord.fromSnapshot),
+          },
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'editEventCopy')
+              : EditEventCopyWidget(
+                  eventID: params.getParam(
+                    'eventID',
+                    ParamType.Document,
+                  ),
+                ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -56,25 +56,10 @@ class UsersRecord extends FirestoreRecord {
   String get realName => _realName ?? '';
   bool hasRealName() => _realName != null;
 
-  // "manualEventName" field.
-  String? _manualEventName;
-  String get manualEventName => _manualEventName ?? '';
-  bool hasManualEventName() => _manualEventName != null;
-
   // "friendsList" field.
   List<String>? _friendsList;
   List<String> get friendsList => _friendsList ?? const [];
   bool hasFriendsList() => _friendsList != null;
-
-  // "manualEventTime" field.
-  DateTime? _manualEventTime;
-  DateTime? get manualEventTime => _manualEventTime;
-  bool hasManualEventTime() => _manualEventTime != null;
-
-  // "manualEventDescription" field.
-  String? _manualEventDescription;
-  String get manualEventDescription => _manualEventDescription ?? '';
-  bool hasManualEventDescription() => _manualEventDescription != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -85,10 +70,7 @@ class UsersRecord extends FirestoreRecord {
     _phoneNumber = snapshotData['phone_number'] as String?;
     _birthday = snapshotData['birthday'] as DateTime?;
     _realName = snapshotData['realName'] as String?;
-    _manualEventName = snapshotData['manualEventName'] as String?;
     _friendsList = getDataList(snapshotData['friendsList']);
-    _manualEventTime = snapshotData['manualEventTime'] as DateTime?;
-    _manualEventDescription = snapshotData['manualEventDescription'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -133,9 +115,6 @@ Map<String, dynamic> createUsersRecordData({
   String? phoneNumber,
   DateTime? birthday,
   String? realName,
-  String? manualEventName,
-  DateTime? manualEventTime,
-  String? manualEventDescription,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -147,9 +126,6 @@ Map<String, dynamic> createUsersRecordData({
       'phone_number': phoneNumber,
       'birthday': birthday,
       'realName': realName,
-      'manualEventName': manualEventName,
-      'manualEventTime': manualEventTime,
-      'manualEventDescription': manualEventDescription,
     }.withoutNulls,
   );
 
@@ -170,10 +146,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.birthday == e2?.birthday &&
         e1?.realName == e2?.realName &&
-        e1?.manualEventName == e2?.manualEventName &&
-        listEquality.equals(e1?.friendsList, e2?.friendsList) &&
-        e1?.manualEventTime == e2?.manualEventTime &&
-        e1?.manualEventDescription == e2?.manualEventDescription;
+        listEquality.equals(e1?.friendsList, e2?.friendsList);
   }
 
   @override
@@ -186,10 +159,7 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.phoneNumber,
         e?.birthday,
         e?.realName,
-        e?.manualEventName,
-        e?.friendsList,
-        e?.manualEventTime,
-        e?.manualEventDescription
+        e?.friendsList
       ]);
 
   @override

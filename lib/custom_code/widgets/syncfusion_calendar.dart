@@ -11,6 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:googleapis/calendar/v3.dart' as google_calendar;
+// import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:googleapis_auth/auth_io.dart';
 
 class SyncfusionCalendar extends StatefulWidget {
   const SyncfusionCalendar({
@@ -111,50 +114,58 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SfCalendar(
-        view: CalendarView.week,
-        showCurrentTimeIndicator: true,
-        dataSource: _dataSource,
-        timeSlotViewSettings: const TimeSlotViewSettings(
-          startHour: 1,
-          endHour: 24,
-          numberOfDaysInView: 1,
-          timeIntervalHeight: 100,
-          timeRulerSize: 90,
-          timeTextStyle: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-            color: Colors.blue,
+          view: CalendarView.week,
+          showCurrentTimeIndicator: true,
+          dataSource: _dataSource,
+          timeSlotViewSettings: const TimeSlotViewSettings(
+            startHour: 1,
+            endHour: 24,
+            numberOfDaysInView: 1,
+            timeIntervalHeight: 100,
+            timeRulerSize: 90,
+            timeTextStyle: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: Colors.blue,
+            ),
           ),
-        ),
-        onTap: (CalendarTapDetails details) async {
-          try {
-            if (details.targetElement == CalendarElement.appointment) {
-              // Get the tapped appointment
-              final Appointment appointment = details.appointments!.first;
+          onTap: (CalendarTapDetails details) async {
+            try {
+              if (details.targetElement == CalendarElement.appointment) {
+                final Appointment appointment = details.appointments!.first;
+                final String? eventID = appointment.notes;
 
-              // Extract the document reference (eventID)
-              final String? eventID =
-                  appointment.notes; // Ensure `notes` contains the document ID
+                if (eventID != null) {
+                  // Fetch the full document from Firestore
+                  final docSnapshot = await FirebaseFirestore.instance
+                      .collection('appointments')
+                      .doc(eventID)
+                      .get();
 
-              if (eventID != null) {
-                // Navigate to the editEvent component
-                context.pushNamed(
-                  'editEvent',
-                  queryParameters: {
-                    'eventID': eventID, // Pass the document reference
-                  },
-                );
-                print('Tapped eventID: $eventID');
+                  if (docSnapshot.exists) {
+                    // Navigate to the FlutterFlow `editEvent` screen
+                    context.pushNamed(
+                      'editEvent', // The name of your screen in FlutterFlow
+                      extra: docSnapshot
+                          .data(), // Pass the full document data as extra
+                    );
+
+                    print(
+                        'Navigated to editEvent with document: ${docSnapshot.data()}');
+                  } else {
+                    print('Document with eventID: $eventID does not exist.');
+                  }
+                } else {
+                  print('Event ID is null for the selected appointment.');
+                }
               } else {
-                print('Event ID is null for the selected appointment.');
-                print('Tapped eventID: $eventID');
+                print('Tapped on a non-appointment element.');
               }
+            } catch (e, stackTrace) {
+              print('Error while opening editEvent: $e');
+              print(stackTrace);
             }
-          } catch (e) {
-            print('Error while opening editEvent: $e');
-          }
-        },
-      ),
+          }),
     );
   }
 }
@@ -164,3 +175,68 @@ class MeetingDataSource extends CalendarDataSource {
     appointments = source;
   }
 }
+
+/* Future<void> fetchAppointmentsFromGoogleCalendar() async {
+  List<Appointment> meetings = [];
+  final currentUser = FirebaseAuth.instance.currentUser;
+
+  if (currentUser == null) {
+    print("No user is logged in.");
+    return;
+  }
+
+  try {
+    final googleSignIn = GoogleSignIn(
+      scopes: [google_calendar.CalendarApi.calendarScope],
+    );
+
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) {
+      print("Google sign-in failed.");
+      return;
+    }
+
+    final authHeaders = await googleUser.authHeaders;
+    final authenticatedClient = authenticatedClient(
+      Client(),
+      AccessCredentials(
+        AccessToken(
+          'Bearer',
+          authHeaders['Authorization']!.split(' ').last,
+          DateTime.now().add(Duration(hours: 1)),
+        ),
+        null,
+        ['https://www.googleapis.com/auth/calendar.readonly'],
+      ),
+    );
+
+    final calendarApi = google_calendar.CalendarApi(authenticatedClient);
+    final events = await calendarApi.events.list('primary');
+
+    for (var event in events.items!) {
+      DateTime startTime = event.start!.dateTime ?? DateTime.now();
+      DateTime endTime =
+          event.end!.dateTime ?? DateTime.now().add(Duration(hours: 1));
+      String eventName = event.summary ?? 'No Title';
+      String eventDescription = event.description ?? '';
+      bool isAllDay = event.start!.date != null;
+
+      meetings.add(Appointment(
+        startTime: startTime,
+        endTime: endTime,
+        subject: eventName,
+        notes: event.id,
+        isAllDay: isAllDay,
+        color: Colors.blue, // Default color for Google Calendar events
+      ));
+    }
+
+    setState(() {
+      _dataSource = MeetingDataSource(meetings);
+      print(
+          "Appointments fetched from Google Calendar and data source updated successfully.");
+    });
+  } catch (e) {
+    print("Error fetching appointments from Google Calendar: $e");
+  }
+} */

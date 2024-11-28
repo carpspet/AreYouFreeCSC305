@@ -10,8 +10,8 @@ class AddGroupsModel extends FlutterFlowModel<AddGroupsWidget> {
   FocusNode? userGroupTextFocusNode;
   TextEditingController? userGroupTextTextController;
   String? Function(BuildContext, String?)? userGroupTextTextControllerValidator;
-  // Stores action output result for [Backend Call - Create Document] action in Button widget.
-  GroupsRecord? allGroups;
+  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
+  GroupsRecord? groupOutput;
   // State field(s) for CreateGroup widget.
   FocusNode? createGroupFocusNode;
   TextEditingController? createGroupTextController;

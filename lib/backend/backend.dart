@@ -9,6 +9,7 @@ import 'schema/users_record.dart';
 import 'schema/friend_requests_record.dart';
 import 'schema/appointments_record.dart';
 import 'schema/groups_record.dart';
+import 'schema/display_name_in_use_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -21,6 +22,7 @@ export 'schema/users_record.dart';
 export 'schema/friend_requests_record.dart';
 export 'schema/appointments_record.dart';
 export 'schema/groups_record.dart';
+export 'schema/display_name_in_use_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -165,6 +167,43 @@ Future<List<GroupsRecord>> queryGroupsRecordOnce({
     queryCollectionOnce(
       GroupsRecord.collection,
       GroupsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query DisplayNameInUseRecords (as a Stream and as a Future).
+Future<int> queryDisplayNameInUseRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DisplayNameInUseRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DisplayNameInUseRecord>> queryDisplayNameInUseRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DisplayNameInUseRecord.collection,
+      DisplayNameInUseRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DisplayNameInUseRecord>> queryDisplayNameInUseRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DisplayNameInUseRecord.collection,
+      DisplayNameInUseRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

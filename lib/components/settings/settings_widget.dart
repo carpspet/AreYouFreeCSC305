@@ -318,7 +318,7 @@ class _SettingsWidgetState extends State<SettingsWidget>
                       await authManager.signOut();
                       GoRouter.of(context).clearRedirectLocation();
 
-                      context.pushNamedAuth('SignUpLogIn', context.mounted);
+                      context.goNamedAuth('SignUpLogIn', context.mounted);
                     },
                     text: 'Logout',
                     options: FFButtonOptions(

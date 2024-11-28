@@ -3,10 +3,12 @@ import '/components/change_password/change_password_widget.dart';
 import '/components/import_calendar/import_calendar_widget.dart';
 import '/components/set_profile_picture/set_profile_picture_widget.dart';
 import '/components/update_email/update_email_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'edit_profile_model.dart';
 export 'edit_profile_model.dart';
 
@@ -17,15 +19,40 @@ class EditProfileWidget extends StatefulWidget {
   State<EditProfileWidget> createState() => _EditProfileWidgetState();
 }
 
-class _EditProfileWidgetState extends State<EditProfileWidget> {
+class _EditProfileWidgetState extends State<EditProfileWidget>
+    with TickerProviderStateMixin {
   late EditProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => EditProfileModel());
+
+    animationsMap.addAll({
+      'containerOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(-40.0, 0.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -48,8 +75,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
           Container(
             width: MediaQuery.sizeOf(context).width * 1.0,
             height: 160.0,
-            decoration: const BoxDecoration(
-              color: Color(0xFF4B39EF),
+            decoration: BoxDecoration(
+              color: FlutterFlowTheme.of(context).primaryText,
             ),
             child: Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(20.0, 40.0, 20.0, 0.0),
@@ -154,336 +181,278 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-            child: Material(
-              color: Colors.transparent,
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Container(
-                width: double.infinity,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 3.0,
-                      color: Color(0x33000000),
-                      offset: Offset(
-                        0.0,
-                        1.0,
-                      ),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 0.0,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 4.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: const UpdateEmailWidget(),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        child: Text(
-                          'Change Email',
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: const Color(0xFF14181B),
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: const UpdateEmailWidget(),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  },
+                  text: 'Change Email',
+                  options: FFButtonOptions(
+                    width: 200.0,
+                    height: 50.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Lato',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
                         ),
-                      ),
-                    ],
+                    elevation: 0.0,
+                    borderSide: const BorderSide(
+                      color: Color(0xFF2E9DC9),
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-            child: Material(
-              color: Colors.transparent,
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Container(
-                width: double.infinity,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 3.0,
-                      color: Color(0x33000000),
-                      offset: Offset(
-                        0.0,
-                        1.0,
-                      ),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 0.0,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 4.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: const ChangePasswordWidget(),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        child: Text(
-                          'Change Password',
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: const Color(0xFF14181B),
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: const ChangePasswordWidget(),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  },
+                  text: 'Change Password',
+                  options: FFButtonOptions(
+                    width: 200.0,
+                    height: 50.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Lato',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
                         ),
-                      ),
-                    ],
+                    elevation: 0.0,
+                    borderSide: const BorderSide(
+                      color: Color(0xFF2E9DC9),
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-            child: Material(
-              color: Colors.transparent,
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Container(
-                width: double.infinity,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 3.0,
-                      color: Color(0x33000000),
-                      offset: Offset(
-                        0.0,
-                        1.0,
-                      ),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 0.0,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 4.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          await showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.transparent,
-                            enableDrag: false,
-                            context: context,
-                            builder: (context) {
-                              return Padding(
-                                padding: MediaQuery.viewInsetsOf(context),
-                                child: const ImportCalendarWidget(),
-                              );
-                            },
-                          ).then((value) => safeSetState(() {}));
-                        },
-                        child: Text(
-                          'Import Calendar',
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: const Color(0xFF14181B),
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    await showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      enableDrag: false,
+                      context: context,
+                      builder: (context) {
+                        return Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: const ImportCalendarWidget(),
+                        );
+                      },
+                    ).then((value) => safeSetState(() {}));
+                  },
+                  text: 'Import Calendar',
+                  options: FFButtonOptions(
+                    width: 200.0,
+                    height: 50.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Lato',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
                         ),
-                      ),
-                    ],
+                    elevation: 0.0,
+                    borderSide: const BorderSide(
+                      color: Color(0xFF2E9DC9),
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-            child: Material(
-              color: Colors.transparent,
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Container(
-                width: double.infinity,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 3.0,
-                      color: Color(0x33000000),
-                      offset: Offset(
-                        0.0,
-                        1.0,
-                      ),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 0.0,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 4.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed('friendListPage');
-                        },
-                        child: Text(
-                          'Friends List',
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Plus Jakarta Sans',
-                                    color: const Color(0xFF14181B),
-                                    fontSize: 16.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: FFButtonWidget(
+                  onPressed: () {
+                    print('Button pressed ...');
+                  },
+                  text: 'Themes',
+                  options: FFButtonOptions(
+                    width: 200.0,
+                    height: 50.0,
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          fontFamily: 'Lato',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          letterSpacing: 0.0,
                         ),
-                      ),
-                    ],
+                    elevation: 0.0,
+                    borderSide: const BorderSide(
+                      color: Color(0xFF2E9DC9),
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-            child: Material(
-              color: Colors.transparent,
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Container(
-                width: double.infinity,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 3.0,
-                      color: Color(0x33000000),
-                      offset: Offset(
-                        0.0,
-                        1.0,
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    if ((Theme.of(context).brightness == Brightness.light) ==
+                        true) {
+                      setDarkModeSetting(context, ThemeMode.dark);
+                      if (animationsMap['containerOnActionTriggerAnimation'] !=
+                          null) {
+                        animationsMap['containerOnActionTriggerAnimation']!
+                            .controller
+                            .forward(from: 0.0);
+                      }
+                    } else {
+                      setDarkModeSetting(context, ThemeMode.light);
+                      if (animationsMap['containerOnActionTriggerAnimation'] !=
+                          null) {
+                        animationsMap['containerOnActionTriggerAnimation']!
+                            .controller
+                            .reverse();
+                      }
+                    }
+                  },
+                  child: Container(
+                    width: 80.0,
+                    height: 40.0,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF1F4F8),
+                      borderRadius: BorderRadius.circular(20.0),
+                      border: Border.all(
+                        color: const Color(0xFFE0E3E7),
+                        width: 1.0,
                       ),
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 0.0,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 4.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Themes',
-                        style: FlutterFlowTheme.of(context).bodyLarge.override(
-                              fontFamily: 'Plus Jakarta Sans',
-                              color: const Color(0xFF14181B),
-                              fontSize: 16.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.normal,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Stack(
+                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        children: [
+                          const Align(
+                            alignment: AlignmentDirectional(-0.9, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  6.0, 0.0, 0.0, 0.0),
+                              child: Icon(
+                                Icons.wb_sunny_rounded,
+                                color: Color(0xFF57636C),
+                                size: 24.0,
+                              ),
                             ),
+                          ),
+                          const Align(
+                            alignment: AlignmentDirectional(1.0, 0.0),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 6.0, 0.0),
+                              child: Icon(
+                                Icons.mode_night_rounded,
+                                color: Color(0xFF57636C),
+                                size: 24.0,
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: const AlignmentDirectional(1.0, 0.0),
+                            child: Container(
+                              width: 36.0,
+                              height: 36.0,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 4.0,
+                                    color: Color(0x430B0D0F),
+                                    offset: Offset(
+                                      0.0,
+                                      2.0,
+                                    ),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(30.0),
+                                shape: BoxShape.rectangle,
+                                border: Border.all(
+                                  color: const Color(0xFF2E9DC9),
+                                ),
+                              ),
+                            ).animateOnActionTrigger(
+                              animationsMap[
+                                  'containerOnActionTriggerAnimation']!,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 40.0),
+            padding: const EdgeInsets.all(24.0),
             child: FFButtonWidget(
               onPressed: () async {
                 GoRouter.of(context).prepareAuthEvent();
@@ -494,24 +463,24 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
               },
               text: 'Log Out',
               options: FFButtonOptions(
-                width: 110.0,
+                width: 1500.0,
                 height: 50.0,
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                 iconPadding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                color: FlutterFlowTheme.of(context).buttonColor,
+                color: FlutterFlowTheme.of(context).primaryBackground,
                 textStyle: FlutterFlowTheme.of(context).bodyLarge.override(
                       fontFamily: 'Plus Jakarta Sans',
-                      color: const Color(0xFF14181B),
+                      color: FlutterFlowTheme.of(context).primaryText,
                       fontSize: 16.0,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.normal,
                     ),
                 elevation: 3.0,
                 borderSide: const BorderSide(
-                  color: Colors.white,
-                  width: 1.0,
+                  color: Color(0xFFFA0E00),
+                  width: 2.0,
                 ),
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(12.0),
               ),
             ),
           ),
