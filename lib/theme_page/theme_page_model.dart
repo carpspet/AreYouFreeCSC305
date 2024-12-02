@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'edit_event_test_widget.dart' show EditEventTestWidget;
+import 'theme_page_widget.dart' show ThemePageWidget;
 import 'package:flutter/material.dart';
 
-class EditEventTestModel extends FlutterFlowModel<EditEventTestWidget> {
+class ThemePageModel extends FlutterFlowModel<ThemePageWidget> {
   @override
   void initState(BuildContext context) {}
 

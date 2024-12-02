@@ -54,7 +54,7 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 150.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -70,10 +70,10 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
                     },
                     child: const SizedBox(
                       width: 400.0,
-                      height: 665.0,
+                      height: 750.0,
                       child: custom_widgets.SyncfusionCalendar(
                         width: 400.0,
-                        height: 665.0,
+                        height: 750.0,
                       ),
                     ),
                   ),
@@ -82,7 +82,7 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
             ),
             Container(
               width: MediaQuery.sizeOf(context).width * 1.0,
-              height: 150.0,
+              height: 52.0,
               decoration: const BoxDecoration(
                 color: Color(0xFF7BC3E2),
                 boxShadow: [
@@ -201,63 +201,6 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
                           ),
                         ],
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 30.0),
-                            child: SelectionArea(
-                                child: Text(
-                              'Month',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    fontSize: 32.0,
-                                    letterSpacing: 0.0,
-                                  ),
-                            )),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          'Previous Day',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        Text(
-                          'Current Day',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                        Text(
-                          'Next Day',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                        ),
-                      ],
                     ),
                   ],
                 ),

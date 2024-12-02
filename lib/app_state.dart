@@ -113,4 +113,46 @@ class FFAppState extends ChangeNotifier {
   set selectedDate(DateTime? value) {
     _selectedDate = value;
   }
+
+  bool _goToNextDay = false;
+  bool get goToNextDay => _goToNextDay;
+  set goToNextDay(bool value) {
+    _goToNextDay = value;
+  }
+
+  bool _goToPreviousDay = false;
+  bool get goToPreviousDay => _goToPreviousDay;
+  set goToPreviousDay(bool value) {
+    _goToPreviousDay = value;
+  }
+
+  bool _goToNextMonth = false;
+  bool get goToNextMonth => _goToNextMonth;
+  set goToNextMonth(bool value) {
+    _goToNextMonth = value;
+  }
+
+  bool _goToPreviousMonth = false;
+  bool get goToPreviousMonth => _goToPreviousMonth;
+  set goToPreviousMonth(bool value) {
+    _goToPreviousMonth = value;
+  }
+
+  String _monthYearText = 'Month';
+  String get monthYearText => _monthYearText;
+  set monthYearText(String value) {
+    _monthYearText = value;
+  }
+
+  String _dayText = 'Day';
+  String get dayText => _dayText;
+  set dayText(String value) {
+    _dayText = value;
+  }
+
+  String _BackgroundTheme = '';
+  String get BackgroundTheme => _BackgroundTheme;
+  set BackgroundTheme(String value) {
+    _BackgroundTheme = value;
+  }
 }

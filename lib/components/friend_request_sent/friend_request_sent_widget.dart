@@ -106,19 +106,19 @@ class _FriendRequestSentWidgetState extends State<FriendRequestSentWidget>
                       child: Container(
                         width: 12.0,
                         height: 12.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primary,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF0CE472),
                           shape: BoxShape.circle,
                         ),
                       ),
                     ),
-                    Row(
+                    const Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         VerticalDivider(
                           thickness: 2.0,
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: Color(0xFF0CE472),
                         ),
                       ],
                     ),

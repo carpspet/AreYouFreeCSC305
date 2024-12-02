@@ -61,6 +61,11 @@ class UsersRecord extends FirestoreRecord {
   List<String> get friendsList => _friendsList ?? const [];
   bool hasFriendsList() => _friendsList != null;
 
+  // "authGroup" field.
+  List<String>? _authGroup;
+  List<String> get authGroup => _authGroup ?? const [];
+  bool hasAuthGroup() => _authGroup != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -71,6 +76,7 @@ class UsersRecord extends FirestoreRecord {
     _birthday = snapshotData['birthday'] as DateTime?;
     _realName = snapshotData['realName'] as String?;
     _friendsList = getDataList(snapshotData['friendsList']);
+    _authGroup = getDataList(snapshotData['authGroup']);
   }
 
   static CollectionReference get collection =>
@@ -146,7 +152,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.birthday == e2?.birthday &&
         e1?.realName == e2?.realName &&
-        listEquality.equals(e1?.friendsList, e2?.friendsList);
+        listEquality.equals(e1?.friendsList, e2?.friendsList) &&
+        listEquality.equals(e1?.authGroup, e2?.authGroup);
   }
 
   @override
@@ -159,7 +166,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.phoneNumber,
         e?.birthday,
         e?.realName,
-        e?.friendsList
+        e?.friendsList,
+        e?.authGroup
       ]);
 
   @override

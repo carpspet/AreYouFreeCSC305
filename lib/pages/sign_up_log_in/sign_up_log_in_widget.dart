@@ -169,7 +169,7 @@ class _SignUpLogInWidgetState extends State<SignUpLogInWidget>
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
                                     'assets/images/AreYouFree_Logo_Transparent_No_Text2.png',
-                                    width: 174.0,
+                                    width: 170.0,
                                     height: 146.0,
                                     fit: BoxFit.fill,
                                   ),

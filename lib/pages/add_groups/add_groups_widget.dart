@@ -171,6 +171,15 @@ class _AddGroupsWidgetState extends State<AddGroupsWidget> {
                             },
                           ),
                         });
+
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'authGroup': FieldValue.arrayUnion(
+                                  [_model.userGroupTextTextController.text]),
+                            },
+                          ),
+                        });
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -327,6 +336,15 @@ class _AddGroupsWidgetState extends State<AddGroupsWidget> {
                           ...mapToFirestore(
                             {
                               'UserInGroup': [currentUserUid],
+                            },
+                          ),
+                        });
+
+                        await currentUserReference!.update({
+                          ...mapToFirestore(
+                            {
+                              'authGroup': FieldValue.arrayUnion(
+                                  [_model.createGroupTextController.text]),
                             },
                           ),
                         });
