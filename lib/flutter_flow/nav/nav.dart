@@ -151,9 +151,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           ),
         ),
         FFRoute(
-          name: 'ThemePage',
-          path: '/themePage',
-          builder: (context, params) => const ThemePageWidget(),
+          name: 'CustomizeColorsPage',
+          path: '/customizeColorsPage',
+          builder: (context, params) => const CustomizeColorsPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

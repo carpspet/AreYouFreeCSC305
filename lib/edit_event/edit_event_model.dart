@@ -23,12 +23,6 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
   FocusNode? eventDescFocusNode;
   TextEditingController? eventDescTextController;
   String? Function(BuildContext, String?)? eventDescTextControllerValidator;
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
-  // State field(s) for Checkbox widget.
-  bool? checkboxValue4;
 
   @override
   void initState(BuildContext context) {}
@@ -40,8 +34,5 @@ class EditEventModel extends FlutterFlowModel<EditEventWidget> {
 
     eventDescFocusNode?.dispose();
     eventDescTextController?.dispose();
-
-    textFieldFocusNode?.dispose();
-    textController3?.dispose();
   }
 }

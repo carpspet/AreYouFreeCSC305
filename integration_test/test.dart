@@ -51,7 +51,6 @@ void main() async {
     await tester.enterText(
         find.byKey(ValueKey('UserName_bwh3')), 'AutomatedDisplayName');
     await tester.tap(find.byKey(ValueKey('Button_3gn1')));
-    expect(find.byKey(ValueKey('Text_2lvp')), findsWidgets);
     await tester.tap(find.byIcon(Icons.home_outlined));
     expect(find.byKey(ValueKey('IconButton_wwly')), findsOneWidget);
   });

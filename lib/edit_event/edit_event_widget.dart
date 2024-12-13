@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_colorpicker/flutterflow_colorpicker.dart';
+import 'package:provider/provider.dart';
 import 'edit_event_model.dart';
 export 'edit_event_model.dart';
 
@@ -36,9 +37,6 @@ class _EditEventWidgetState extends State<EditEventWidget> {
 
     _model.eventDescFocusNode ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -51,8 +49,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: const Color(0xFF6F6767),
@@ -135,7 +138,40 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                       fontFamily: 'Lato',
                                       letterSpacing: 0.0,
                                     ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: valueOrDefault<Color>(
+                                  FFAppState().BorderColor,
+                                  FlutterFlowTheme.of(context).primary,
+                                ),
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Color(0x00000000),
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Color(0x00000000),
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: Color(0x00000000),
+                                width: 2.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
                             filled: true,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyLarge.override(
@@ -153,9 +189,8 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
                                   border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 1.0,
+                                    color: FFAppState().BorderColor,
+                                    width: 2.0,
                                   ),
                                 ),
                                 child: Row(
@@ -294,9 +329,8 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.0),
                                   border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 1.0,
+                                    color: FFAppState().BorderColor,
+                                    width: 2.0,
                                   ),
                                 ),
                                 child: Row(
@@ -453,10 +487,11 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                       ),
                                     ),
                                     unselectedWidgetColor:
-                                        FlutterFlowTheme.of(context).accent2,
+                                        FFAppState().BorderColor,
                                   ),
                                   child: Checkbox(
-                                    value: _model.checkboxValue1 ??= false,
+                                    value: _model.checkboxValue1 ??=
+                                        containerAppointmentsRecord.isAllDay,
                                     onChanged: (newValue) async {
                                       safeSetState(() =>
                                           _model.checkboxValue1 = newValue!);
@@ -470,11 +505,9 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                     },
                                     side: BorderSide(
                                       width: 2,
-                                      color:
-                                          FlutterFlowTheme.of(context).accent2,
+                                      color: FFAppState().BorderColor,
                                     ),
-                                    activeColor:
-                                        FlutterFlowTheme.of(context).primary,
+                                    activeColor: FFAppState().BorderColor,
                                   ),
                                 ),
                                 Text(
@@ -504,15 +537,16 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                       ),
                                     ),
                                     unselectedWidgetColor:
-                                        FlutterFlowTheme.of(context).accent2,
+                                        FFAppState().BorderColor,
                                   ),
                                   child: Checkbox(
-                                    value: _model.checkboxValue2 ??= false,
+                                    value: _model.checkboxValue2 ??=
+                                        containerAppointmentsRecord.daily,
                                     onChanged: (newValue) async {
                                       safeSetState(() =>
                                           _model.checkboxValue2 = newValue!);
                                       if (newValue!) {
-                                        FFAppState().Weekly = true;
+                                        FFAppState().daily = true;
                                         safeSetState(() {});
                                       } else {
                                         FFAppState().Weekly = false;
@@ -521,15 +555,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                     },
                                     side: BorderSide(
                                       width: 2,
-                                      color:
-                                          FlutterFlowTheme.of(context).accent2,
+                                      color: FFAppState().BorderColor,
                                     ),
-                                    activeColor:
-                                        FlutterFlowTheme.of(context).primary,
+                                    activeColor: FFAppState().BorderColor,
                                   ),
                                 ),
                                 Text(
-                                  'Weekly',
+                                  'Daily',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -555,15 +587,16 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                       ),
                                     ),
                                     unselectedWidgetColor:
-                                        FlutterFlowTheme.of(context).accent2,
+                                        FFAppState().BorderColor,
                                   ),
                                   child: Checkbox(
-                                    value: _model.checkboxValue3 ??= false,
+                                    value: _model.checkboxValue3 ??=
+                                        containerAppointmentsRecord.weekly,
                                     onChanged: (newValue) async {
                                       safeSetState(() =>
                                           _model.checkboxValue3 = newValue!);
                                       if (newValue!) {
-                                        FFAppState().Monthly = true;
+                                        FFAppState().Weekly = true;
                                         safeSetState(() {});
                                       } else {
                                         FFAppState().Monthly = false;
@@ -572,15 +605,13 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                     },
                                     side: BorderSide(
                                       width: 2,
-                                      color:
-                                          FlutterFlowTheme.of(context).accent2,
+                                      color: FFAppState().BorderColor,
                                     ),
-                                    activeColor:
-                                        FlutterFlowTheme.of(context).primary,
+                                    activeColor: FFAppState().BorderColor,
                                   ),
                                 ),
                                 Text(
-                                  'Monthly',
+                                  'Weekly',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -716,180 +747,6 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                           validator: _model.eventDescTextControllerValidator
                               .asValidator(context),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                controller: _model.textController3,
-                                focusNode: _model.textFieldFocusNode,
-                                autofocus: false,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Add Group or Friend',
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .bodyLarge
-                                      .override(
-                                        fontFamily: 'Lato',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  filled: true,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyLarge
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      letterSpacing: 0.0,
-                                    ),
-                                validator: _model.textController3Validator
-                                    .asValidator(context),
-                              ),
-                            ),
-                            FFButtonWidget(
-                              onPressed: () {
-                                print('Button pressed ...');
-                              },
-                              text: 'Add',
-                              options: FFButtonOptions(
-                                width: 80.0,
-                                height: 50.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Lato',
-                                      color: FlutterFlowTheme.of(context).info,
-                                      letterSpacing: 0.0,
-                                    ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          ].divide(const SizedBox(width: 12.0)),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Theme(
-                              data: ThemeData(
-                                checkboxTheme: const CheckboxThemeData(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(0.0),
-                                      bottomRight: Radius.circular(0.0),
-                                      topLeft: Radius.circular(0.0),
-                                      topRight: Radius.circular(0.0),
-                                    ),
-                                  ),
-                                ),
-                                unselectedWidgetColor:
-                                    FlutterFlowTheme.of(context).accent2,
-                              ),
-                              child: Checkbox(
-                                value: _model.checkboxValue4 ??= true,
-                                onChanged: (newValue) async {
-                                  safeSetState(
-                                      () => _model.checkboxValue4 = newValue!);
-                                },
-                                side: BorderSide(
-                                  width: 2,
-                                  color: FlutterFlowTheme.of(context).accent2,
-                                ),
-                                activeColor:
-                                    FlutterFlowTheme.of(context).primary,
-                              ),
-                            ),
-                            Text(
-                              'Add Travel Time',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Lato',
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 12.0, 8.0, 12.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '30 minutes',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Lato',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_drop_down,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 24.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    width: 1.0,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      8.0, 12.0, 8.0, 12.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        'Before',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Lato',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      Icon(
-                                        Icons.arrow_drop_down,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 24.0,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ].divide(const SizedBox(width: 12.0)),
-                        ),
                         FFButtonWidget(
                           onPressed: () async {
                             await containerAppointmentsRecord.reference
@@ -900,9 +757,17 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                               eventDescription:
                                   _model.eventDescTextController.text,
                               color: _model.colorPicked,
+                              isAllDay: _model.checkboxValue1,
+                              weekly: _model.checkboxValue3,
+                              daily: _model.checkboxValue2,
                             ));
 
                             context.pushNamed('CalendarView');
+
+                            FFAppState().allDay = false;
+                            FFAppState().Weekly = false;
+                            FFAppState().daily = false;
+                            safeSetState(() {});
                           },
                           text: 'Save Event',
                           options: FFButtonOptions(
@@ -912,15 +777,40 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
+                            color: FFAppState().ButtonColor,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
                                   fontFamily: 'Lato',
-                                  color: FlutterFlowTheme.of(context).info,
+                                  color:
+                                      (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .black) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .redd) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .green) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .realBlue) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .purple) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .pink)
+                                          ? FlutterFlowTheme.of(context).white
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryText,
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,
+                            borderSide: BorderSide(
+                              color: FFAppState().BorderColor,
+                              width: 2.0,
+                            ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
@@ -939,15 +829,40 @@ class _EditEventWidgetState extends State<EditEventWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: const Color(0xFFEF393C),
+                            color: FFAppState().ButtonColor,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
                                   fontFamily: 'Lato',
-                                  color: FlutterFlowTheme.of(context).info,
+                                  color:
+                                      (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .black) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .redd) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .green) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .realBlue) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .purple) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .pink)
+                                          ? FlutterFlowTheme.of(context).white
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryText,
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,
+                            borderSide: BorderSide(
+                              color: FFAppState().BorderColor,
+                              width: 2.0,
+                            ),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),

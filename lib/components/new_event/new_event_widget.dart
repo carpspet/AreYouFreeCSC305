@@ -4,8 +4,6 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_colorpicker/flutterflow_colorpicker.dart';
 import 'package:provider/provider.dart';
@@ -43,9 +41,6 @@ class _NewEventWidgetState extends State<NewEventWidget> {
 
     _model.eventDescTextController ??= TextEditingController();
     _model.eventDescFocusNode ??= FocusNode();
-
-    _model.groupNameTextController ??= TextEditingController();
-    _model.groupNameFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -129,8 +124,8 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         border: Border.all(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
+                          color: FFAppState().BorderColor,
+                          width: 2.0,
                         ),
                       ),
                       child: Row(
@@ -269,6 +264,8 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                                   );
                                 });
                               }
+                              FFAppState().timePicked1 = true;
+                              safeSetState(() {});
                             },
                           ),
                         ].divide(const SizedBox(width: 12.0)),
@@ -280,8 +277,8 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         border: Border.all(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
+                          color: FFAppState().BorderColor,
+                          width: 2.0,
                         ),
                       ),
                       child: Row(
@@ -327,69 +324,102 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                               size: 24.0,
                             ),
                             onPressed: () async {
-                              await showModalBottomSheet<bool>(
-                                  context: context,
-                                  builder: (context) {
-                                    final datePicked2CupertinoTheme =
-                                        CupertinoTheme.of(context);
-                                    return ScrollConfiguration(
-                                      behavior: const MaterialScrollBehavior()
-                                          .copyWith(
-                                        dragDevices: {
-                                          PointerDeviceKind.mouse,
-                                          PointerDeviceKind.touch,
-                                          PointerDeviceKind.stylus,
-                                          PointerDeviceKind.unknown
-                                        },
-                                      ),
-                                      child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                3,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        child: CupertinoTheme(
-                                          data: datePicked2CupertinoTheme
-                                              .copyWith(
-                                            textTheme:
-                                                datePicked2CupertinoTheme
-                                                    .textTheme
-                                                    .copyWith(
-                                              dateTimePickerTextStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMedium
-                                                      .override(
-                                                        fontFamily: 'Lato',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        letterSpacing: 0.0,
-                                                      ),
+                              final datePicked2Date = await showDatePicker(
+                                context: context,
+                                initialDate: getCurrentTimestamp,
+                                firstDate: getCurrentTimestamp,
+                                lastDate: DateTime(2050),
+                                builder: (context, child) {
+                                  return wrapInMaterialDatePickerTheme(
+                                    context,
+                                    child!,
+                                    headerBackgroundColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    headerForegroundColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    headerTextStyle:
+                                        FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .override(
+                                              fontFamily: 'Lato',
+                                              fontSize: 32.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
                                             ),
-                                          ),
-                                          child: CupertinoDatePicker(
-                                            mode: CupertinoDatePickerMode
-                                                .dateAndTime,
-                                            minimumDate: getCurrentTimestamp,
-                                            initialDateTime:
-                                                getCurrentTimestamp,
-                                            maximumDate: DateTime(2050),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            use24hFormat: false,
-                                            onDateTimeChanged: (newDateTime) =>
-                                                safeSetState(() {
-                                              _model.datePicked2 = newDateTime;
-                                            }),
-                                          ),
-                                        ),
-                                      ),
+                                    pickerBackgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                    pickerForegroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                    selectedDateTimeBackgroundColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    selectedDateTimeForegroundColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    actionButtonForegroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                    iconSize: 24.0,
+                                  );
+                                },
+                              );
+
+                              TimeOfDay? datePicked2Time;
+                              if (datePicked2Date != null) {
+                                datePicked2Time = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.fromDateTime(
+                                      getCurrentTimestamp),
+                                  builder: (context, child) {
+                                    return wrapInMaterialTimePickerTheme(
+                                      context,
+                                      child!,
+                                      headerBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      headerForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      headerTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .headlineLarge
+                                              .override(
+                                                fontFamily: 'Lato',
+                                                fontSize: 32.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                      pickerBackgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                      pickerForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      selectedDateTimeBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      selectedDateTimeForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      actionButtonForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      iconSize: 24.0,
                                     );
-                                  });
+                                  },
+                                );
+                              }
+
+                              if (datePicked2Date != null &&
+                                  datePicked2Time != null) {
+                                safeSetState(() {
+                                  _model.datePicked2 = DateTime(
+                                    datePicked2Date.year,
+                                    datePicked2Date.month,
+                                    datePicked2Date.day,
+                                    datePicked2Time!.hour,
+                                    datePicked2Time.minute,
+                                  );
+                                });
+                              }
+                              FFAppState().timePicked2 = true;
+                              safeSetState(() {});
                             },
                           ),
                         ].divide(const SizedBox(width: 12.0)),
@@ -416,8 +446,7 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                               ),
                             ),
                           ),
-                          unselectedWidgetColor:
-                              FlutterFlowTheme.of(context).accent2,
+                          unselectedWidgetColor: FFAppState().BorderColor,
                         ),
                         child: Checkbox(
                           value: _model.checkboxValue1 ??= false,
@@ -434,9 +463,9 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                           },
                           side: BorderSide(
                             width: 2,
-                            color: FlutterFlowTheme.of(context).accent2,
+                            color: FFAppState().BorderColor,
                           ),
-                          activeColor: FlutterFlowTheme.of(context).primary,
+                          activeColor: FFAppState().BorderColor,
                         ),
                       ),
                       Text(
@@ -463,8 +492,7 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                               ),
                             ),
                           ),
-                          unselectedWidgetColor:
-                              FlutterFlowTheme.of(context).accent2,
+                          unselectedWidgetColor: FFAppState().BorderColor,
                         ),
                         child: Checkbox(
                           value: _model.checkboxValue2 ??= false,
@@ -472,7 +500,7 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                             safeSetState(
                                 () => _model.checkboxValue2 = newValue!);
                             if (newValue!) {
-                              FFAppState().Weekly = true;
+                              FFAppState().daily = true;
                               safeSetState(() {});
                             } else {
                               FFAppState().Weekly = false;
@@ -481,13 +509,13 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                           },
                           side: BorderSide(
                             width: 2,
-                            color: FlutterFlowTheme.of(context).accent2,
+                            color: FFAppState().BorderColor,
                           ),
-                          activeColor: FlutterFlowTheme.of(context).primary,
+                          activeColor: FFAppState().BorderColor,
                         ),
                       ),
                       Text(
-                        'Weekly',
+                        'Daily',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
                               letterSpacing: 0.0,
@@ -510,8 +538,7 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                               ),
                             ),
                           ),
-                          unselectedWidgetColor:
-                              FlutterFlowTheme.of(context).accent2,
+                          unselectedWidgetColor: FFAppState().BorderColor,
                         ),
                         child: Checkbox(
                           value: _model.checkboxValue3 ??= false,
@@ -519,7 +546,7 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                             safeSetState(
                                 () => _model.checkboxValue3 = newValue!);
                             if (newValue!) {
-                              FFAppState().Monthly = true;
+                              FFAppState().Weekly = true;
                               safeSetState(() {});
                             } else {
                               FFAppState().Monthly = false;
@@ -528,13 +555,13 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                           },
                           side: BorderSide(
                             width: 2,
-                            color: FlutterFlowTheme.of(context).accent2,
+                            color: FFAppState().BorderColor,
                           ),
-                          activeColor: FlutterFlowTheme.of(context).primary,
+                          activeColor: FFAppState().BorderColor,
                         ),
                       ),
                       Text(
-                        'Monthly',
+                        'Weekly',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Lato',
                               letterSpacing: 0.0,
@@ -577,7 +604,7 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.0),
                         border: Border.all(
-                          color: const Color(0xFFE0E3E7),
+                          color: FFAppState().BorderColor,
                         ),
                       ),
                       child: Padding(
@@ -658,83 +685,6 @@ class _NewEventWidgetState extends State<NewEventWidget> {
               Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Expanded(
-                    child: TextFormField(
-                      controller: _model.groupNameTextController,
-                      focusNode: _model.groupNameFocusNode,
-                      autofocus: false,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: 'Add Group',
-                        hintStyle:
-                            FlutterFlowTheme.of(context).bodyLarge.override(
-                                  fontFamily: 'Lato',
-                                  letterSpacing: 0.0,
-                                ),
-                        filled: true,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyLarge.override(
-                            fontFamily: 'Lato',
-                            letterSpacing: 0.0,
-                          ),
-                      validator: _model.groupNameTextControllerValidator
-                          .asValidator(context),
-                    ),
-                  ),
-                  FFButtonWidget(
-                    onPressed: () async {
-                      _model.boolGroupName = await queryGroupsRecordOnce(
-                        queryBuilder: (groupsRecord) => groupsRecord.where(
-                          'GroupName',
-                          isEqualTo: _model.groupNameTextController.text,
-                        ),
-                      );
-                      if (_model.boolGroupName != null &&
-                          (_model.boolGroupName)!.isNotEmpty) {
-                        await GroupsRecord.collection
-                            .doc()
-                            .set(createGroupsRecordData(
-                              groupName: _model.groupNameTextController.text,
-                            ));
-                      } else {
-                        await GroupsRecord.collection.doc().set({
-                          ...createGroupsRecordData(
-                            groupName: _model.groupNameTextController.text,
-                          ),
-                          ...mapToFirestore(
-                            {
-                              'UserInGroup': [currentUserUid],
-                            },
-                          ),
-                        });
-                      }
-
-                      safeSetState(() {});
-                    },
-                    text: 'Add',
-                    options: FFButtonOptions(
-                      width: 80.0,
-                      height: 50.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).bodyMedium.override(
-                                fontFamily: 'Lato',
-                                color: FlutterFlowTheme.of(context).info,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 0.0,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                ].divide(const SizedBox(width: 12.0)),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
                   Theme(
                     data: ThemeData(
                       checkboxTheme: const CheckboxThemeData(
@@ -747,19 +697,18 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                           ),
                         ),
                       ),
-                      unselectedWidgetColor:
-                          FlutterFlowTheme.of(context).accent2,
+                      unselectedWidgetColor: FFAppState().BorderColor,
                     ),
                     child: Checkbox(
-                      value: _model.checkboxValue4 ??= true,
+                      value: _model.checkboxValue4 ??= false,
                       onChanged: (newValue) async {
                         safeSetState(() => _model.checkboxValue4 = newValue!);
                       },
                       side: BorderSide(
                         width: 2,
-                        color: FlutterFlowTheme.of(context).accent2,
+                        color: FFAppState().BorderColor,
                       ),
-                      activeColor: FlutterFlowTheme.of(context).primary,
+                      activeColor: FFAppState().BorderColor,
                     ),
                   ),
                   Text(
@@ -772,10 +721,11 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(8.0),
                         border: Border.all(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
+                          color: FFAppState().BorderColor,
+                          width: 2.0,
                         ),
                       ),
                       child: Padding(
@@ -807,10 +757,11 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(8.0),
                         border: Border.all(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
+                          color: FFAppState().BorderColor,
+                          width: 2.0,
                         ),
                       ),
                       child: Padding(
@@ -843,25 +794,57 @@ class _NewEventWidgetState extends State<NewEventWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  await AppointmentsRecord.collection
-                      .doc()
-                      .set(createAppointmentsRecordData(
-                        userID: currentUserUid,
-                        eventName: _model.eventNameTextController.text,
-                        eventTime: _model.datePicked1,
-                        endTime: _model.datePicked2,
-                        eventDescription: _model.eventDescTextController.text,
-                        isAllDay: FFAppState().allDay,
-                        monthly: FFAppState().Monthly,
-                        weekly: FFAppState().Weekly,
-                        color: _model.colorPicked,
-                      ));
+                  if (!FFAppState().timePicked1) {
+                    await AppointmentsRecord.collection
+                        .doc()
+                        .set(createAppointmentsRecordData(
+                          userID: currentUserDisplayName,
+                          eventName: _model.eventNameTextController.text,
+                          eventTime: getCurrentTimestamp,
+                          endTime: getCurrentTimestamp,
+                          eventDescription: _model.eventDescTextController.text,
+                          isAllDay: FFAppState().allDay,
+                          weekly: FFAppState().Weekly,
+                          color: _model.colorPicked,
+                          daily: FFAppState().daily,
+                        ));
+                  } else if (!FFAppState().timePicked2) {
+                    await AppointmentsRecord.collection
+                        .doc()
+                        .set(createAppointmentsRecordData(
+                          userID: currentUserDisplayName,
+                          eventName: _model.eventNameTextController.text,
+                          eventTime: getCurrentTimestamp,
+                          endTime: getCurrentTimestamp,
+                          eventDescription: _model.eventDescTextController.text,
+                          isAllDay: FFAppState().allDay,
+                          weekly: FFAppState().Weekly,
+                          color: _model.colorPicked,
+                          daily: FFAppState().daily,
+                        ));
+                  } else {
+                    await AppointmentsRecord.collection
+                        .doc()
+                        .set(createAppointmentsRecordData(
+                          userID: currentUserDisplayName,
+                          eventName: _model.eventNameTextController.text,
+                          eventTime: _model.datePicked1,
+                          endTime: _model.datePicked2,
+                          eventDescription: _model.eventDescTextController.text,
+                          isAllDay: FFAppState().allDay,
+                          weekly: FFAppState().Weekly,
+                          color: _model.colorPicked,
+                          daily: FFAppState().daily,
+                        ));
+                  }
 
                   context.pushNamed('CalendarView');
 
                   FFAppState().allDay = false;
                   FFAppState().Weekly = false;
-                  FFAppState().Monthly = false;
+                  FFAppState().daily = false;
+                  FFAppState().timePicked1 = false;
+                  FFAppState().timePicked2 = false;
                   safeSetState(() {});
                 },
                 text: 'Save Event',
@@ -871,13 +854,30 @@ class _NewEventWidgetState extends State<NewEventWidget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: FlutterFlowTheme.of(context).primary,
+                  color: FFAppState().ButtonColor,
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Lato',
-                        color: FlutterFlowTheme.of(context).info,
+                        color: (FFAppState().ButtonColor ==
+                                    FlutterFlowTheme.of(context).black) ||
+                                (FFAppState().ButtonColor ==
+                                    FlutterFlowTheme.of(context).redd) ||
+                                (FFAppState().ButtonColor ==
+                                    FlutterFlowTheme.of(context).green) ||
+                                (FFAppState().ButtonColor ==
+                                    FlutterFlowTheme.of(context).realBlue) ||
+                                (FFAppState().ButtonColor ==
+                                    FlutterFlowTheme.of(context).purple) ||
+                                (FFAppState().ButtonColor ==
+                                    FlutterFlowTheme.of(context).pink)
+                            ? FlutterFlowTheme.of(context).white
+                            : FlutterFlowTheme.of(context).primaryText,
                         letterSpacing: 0.0,
                       ),
                   elevation: 0.0,
+                  borderSide: BorderSide(
+                    color: FFAppState().BorderColor,
+                    width: 2.0,
+                  ),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
               ),

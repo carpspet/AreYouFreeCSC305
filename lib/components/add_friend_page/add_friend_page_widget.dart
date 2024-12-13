@@ -9,6 +9,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'add_friend_page_model.dart';
 export 'add_friend_page_model.dart';
 
@@ -86,6 +87,8 @@ class _AddFriendPageWidgetState extends State<AddFriendPageWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return BackdropFilter(
       filter: ImageFilter.blur(
         sigmaX: 5.0,
@@ -243,12 +246,13 @@ class _AddFriendPageWidgetState extends State<AddFriendPageWidget>
                                         topRight: Radius.circular(4.0),
                                       ),
                                     ),
-                                    focusedBorder: const UnderlineInputBorder(
+                                    focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF4B39EF),
+                                        color:
+                                            FlutterFlowTheme.of(context).blue,
                                         width: 2.0,
                                       ),
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(4.0),
                                         topRight: Radius.circular(4.0),
                                       ),
@@ -311,7 +315,6 @@ class _AddFriendPageWidgetState extends State<AddFriendPageWidget>
                                                 receiverID: _model
                                                     .addFriendEmailTextController
                                                     .text,
-                                                status: 'Pending...',
                                                 username:
                                                     currentUserDisplayName,
                                               ));
@@ -346,23 +349,52 @@ class _AddFriendPageWidgetState extends State<AddFriendPageWidget>
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryBackground,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .titleSmall
-                                              .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 16.0,
-                                                letterSpacing: 0.0,
-                                                fontWeight: FontWeight.w500,
-                                              ),
+                                          color: FFAppState().ButtonColor,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily:
+                                                        'Plus Jakarta Sans',
+                                                    color: (FFAppState().ButtonColor == FlutterFlowTheme.of(context).black) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .redd) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .green) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .realBlue) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .purple) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .pink)
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .white
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                    fontSize: 16.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
                                           elevation: 2.0,
-                                          borderSide: const BorderSide(
-                                            color: Color(0xFF0CE472),
+                                          borderSide: BorderSide(
+                                            color: FFAppState().BorderColor,
                                             width: 2.0,
                                           ),
                                           borderRadius:

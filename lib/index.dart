@@ -11,4 +11,5 @@ export '/pages/friend_list_page/friend_list_page_widget.dart'
     show FriendListPageWidget;
 export '/pages/add_groups/add_groups_widget.dart' show AddGroupsWidget;
 export '/edit_event/edit_event_widget.dart' show EditEventWidget;
-export '/theme_page/theme_page_widget.dart' show ThemePageWidget;
+export '/pages/customize_colors_page/customize_colors_page_widget.dart'
+    show CustomizeColorsPageWidget;

@@ -2,6 +2,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'profile_welcome_model.dart';
 export 'profile_welcome_model.dart';
 
@@ -38,6 +39,8 @@ class _ProfileWelcomeWidgetState extends State<ProfileWelcomeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
       child: Container(
@@ -82,14 +85,28 @@ class _ProfileWelcomeWidgetState extends State<ProfileWelcomeWidget> {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                         child: FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
+                          borderColor: FFAppState().BorderColor,
                           borderRadius: 30.0,
-                          borderWidth: 1.0,
+                          borderWidth: 2.0,
                           buttonSize: 40.0,
-                          fillColor: FlutterFlowTheme.of(context).secondary,
-                          icon: const Icon(
+                          fillColor: FFAppState().ButtonColor,
+                          icon: Icon(
                             Icons.arrow_forward,
-                            color: Colors.white,
+                            color: (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).black) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).redd) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).green) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context)
+                                            .realBlue) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).purple) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).pink)
+                                ? FlutterFlowTheme.of(context).white
+                                : FlutterFlowTheme.of(context).primaryText,
                             size: 20.0,
                           ),
                           onPressed: () async {

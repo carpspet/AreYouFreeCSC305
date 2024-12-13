@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'import_calendar_model.dart';
 export 'import_calendar_model.dart';
 
@@ -39,6 +40,8 @@ class _ImportCalendarWidgetState extends State<ImportCalendarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
       child: SingleChildScrollView(
@@ -81,14 +84,39 @@ class _ImportCalendarWidgetState extends State<ImportCalendarWidget> {
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: FFAppState().ButtonColor,
                           textStyle:
                               FlutterFlowTheme.of(context).titleMedium.override(
                                     fontFamily: 'Lato',
-                                    color: Colors.white,
+                                    color:
+                                        (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .black) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .redd) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .green) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .realBlue) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .purple) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .pink)
+                                            ? FlutterFlowTheme.of(context).white
+                                            : FlutterFlowTheme.of(context)
+                                                .primaryText,
                                     letterSpacing: 0.0,
                                   ),
                           elevation: 0.0,
+                          borderSide: BorderSide(
+                            color: FFAppState().BorderColor,
+                            width: 2.0,
+                          ),
                           borderRadius: BorderRadius.circular(28.0),
                         ),
                       ),
@@ -159,14 +187,19 @@ class _ImportCalendarWidgetState extends State<ImportCalendarWidget> {
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).tertiary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Lato',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
+                          color: FlutterFlowTheme.of(context).primaryBackground,
+                          textStyle: FlutterFlowTheme.of(context)
+                              .titleMedium
+                              .override(
+                                fontFamily: 'Lato',
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                letterSpacing: 0.0,
+                              ),
                           elevation: 0.0,
+                          borderSide: BorderSide(
+                            color: FFAppState().BorderColor,
+                            width: 2.0,
+                          ),
                           borderRadius: BorderRadius.circular(28.0),
                         ),
                       ),

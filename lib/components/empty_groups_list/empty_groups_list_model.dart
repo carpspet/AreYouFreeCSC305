@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'theme_page_widget.dart' show ThemePageWidget;
+import 'empty_groups_list_widget.dart' show EmptyGroupsListWidget;
 import 'package:flutter/material.dart';
 
-class ThemePageModel extends FlutterFlowModel<ThemePageWidget> {
+class EmptyGroupsListModel extends FlutterFlowModel<EmptyGroupsListWidget> {
   @override
   void initState(BuildContext context) {}
 

@@ -56,6 +56,22 @@ abstract class FlutterFlowTheme {
 
   late Color buttonColor;
   late Color customColor1;
+  late Color borderColor;
+  late Color blue;
+  late Color border2;
+  late Color calendarTop;
+  late Color gold;
+  late Color redd;
+  late Color orange;
+  late Color yellow;
+  late Color limeGreen;
+  late Color green;
+  late Color aqua;
+  late Color realBlue;
+  late Color pink;
+  late Color purple;
+  late Color black;
+  late Color white;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -136,7 +152,7 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color secondaryText = const Color(0xFF57636C);
   late Color primaryBackground = const Color(0xFFF1F4F8);
   late Color secondaryBackground = const Color(0xFFFFFFFF);
-  late Color accent1 = const Color(0x4C4B39EF);
+  late Color accent1 = const Color(0xFF4B39EF);
   late Color accent2 = const Color(0x4D39D2C0);
   late Color accent3 = const Color(0x4DEE8B60);
   late Color accent4 = const Color(0xCCFFFFFF);
@@ -147,6 +163,22 @@ class LightModeTheme extends FlutterFlowTheme {
 
   late Color buttonColor = const Color(0x4AA86CA9);
   late Color customColor1 = const Color(0xFFDD534C);
+  late Color borderColor = const Color(0xCFA839EF);
+  late Color blue = const Color(0xFF00B2FF);
+  late Color border2 = const Color(0xFF2E9DC9);
+  late Color calendarTop = const Color(0xFF74CAEE);
+  late Color gold = const Color(0xCFD1AF13);
+  late Color redd = const Color(0xFFFF0000);
+  late Color orange = const Color(0xFFFFA500);
+  late Color yellow = const Color(0xFFFFFF00);
+  late Color limeGreen = const Color(0xFF00FF00);
+  late Color green = const Color(0xFF008000);
+  late Color aqua = const Color(0xFF00FFFF);
+  late Color realBlue = const Color(0xFF0000FF);
+  late Color pink = const Color(0xFFFF00FF);
+  late Color purple = const Color(0xFF800080);
+  late Color black = const Color(0xFF000000);
+  late Color white = const Color(0xFFFFFFFF);
 }
 
 abstract class Typography {
@@ -318,10 +350,10 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color tertiary = const Color(0xFFEE8B60);
   late Color alternate = const Color(0xFF262D34);
   late Color primaryText = const Color(0xFFFFFFFF);
-  late Color secondaryText = const Color(0xFF95A1AC);
+  late Color secondaryText = const Color(0xEBFFFFFF);
   late Color primaryBackground = const Color(0xFF1D2428);
   late Color secondaryBackground = const Color(0xFF14181B);
-  late Color accent1 = const Color(0x4C4B39EF);
+  late Color accent1 = const Color(0xCFA839EF);
   late Color accent2 = const Color(0x4D39D2C0);
   late Color accent3 = const Color(0x4DEE8B60);
   late Color accent4 = const Color(0xB2262D34);
@@ -332,6 +364,22 @@ class DarkModeTheme extends FlutterFlowTheme {
 
   late Color buttonColor = const Color(0xFF4AAB04);
   late Color customColor1 = const Color(0xFFDD534C);
+  late Color borderColor = const Color(0xFFF213AC);
+  late Color blue = const Color(0xFF008113);
+  late Color border2 = const Color(0xFFE9900A);
+  late Color calendarTop = const Color(0xFF92CDC1);
+  late Color gold = const Color(0xCFD1AF13);
+  late Color redd = const Color(0xFFD92148);
+  late Color orange = const Color(0xFFA9C58D);
+  late Color yellow = const Color(0xFFA5C18E);
+  late Color limeGreen = const Color(0xFF23624C);
+  late Color green = const Color(0xFF751931);
+  late Color aqua = const Color(0xFF91424F);
+  late Color realBlue = const Color(0xFF1CA2FD);
+  late Color pink = const Color(0xFFE5FEB7);
+  late Color purple = const Color(0xFFB2605B);
+  late Color black = const Color(0xFF80BBCE);
+  late Color white = const Color(0xFF49EE89);
 }
 
 extension TextStyleHelper on TextStyle {

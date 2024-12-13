@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'set_profile_picture_model.dart';
 export 'set_profile_picture_model.dart';
 
@@ -43,6 +44,8 @@ class _SetProfilePictureWidgetState extends State<SetProfilePictureWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: MediaQuery.sizeOf(context).height * 1.0,
@@ -171,15 +174,40 @@ class _SetProfilePictureWidgetState extends State<SetProfilePictureWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
+                            color: FFAppState().ButtonColor,
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Lato',
-                                  color: Colors.white,
+                                  color:
+                                      (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .black) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .redd) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .green) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .realBlue) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .purple) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .pink)
+                                          ? FlutterFlowTheme.of(context).white
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryText,
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,
+                            borderSide: BorderSide(
+                              color: FFAppState().BorderColor,
+                              width: 2.0,
+                            ),
                             borderRadius: BorderRadius.circular(40.0),
                           ),
                         ),
@@ -195,15 +223,40 @@ class _SetProfilePictureWidgetState extends State<SetProfilePictureWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
+                            color: FFAppState().ButtonColor,
                             textStyle: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
                                   fontFamily: 'Lato',
-                                  color: Colors.white,
+                                  color:
+                                      (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .black) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .redd) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .green) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .realBlue) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .purple) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .pink)
+                                          ? FlutterFlowTheme.of(context).white
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryText,
                                   letterSpacing: 0.0,
                                 ),
                             elevation: 0.0,
+                            borderSide: BorderSide(
+                              color: FFAppState().BorderColor,
+                              width: 2.0,
+                            ),
                             borderRadius: BorderRadius.circular(40.0),
                           ),
                         ),
@@ -291,9 +344,9 @@ class _SetProfilePictureWidgetState extends State<SetProfilePictureWidget> {
                                 ));
                               },
                               text: 'Gallery',
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.photo_library,
-                                color: Colors.white,
+                                color: FlutterFlowTheme.of(context).primaryText,
                                 size: 15.0,
                               ),
                               options: FFButtonOptions(
@@ -303,15 +356,40 @@ class _SetProfilePictureWidgetState extends State<SetProfilePictureWidget> {
                                     0.0, 0.0, 0.0, 0.0),
                                 iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).secondary,
+                                color: FFAppState().ButtonColor,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Lato',
-                                      color: Colors.white,
+                                      color: (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme
+                                                          .of(context)
+                                                      .black) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .redd) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .green) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .realBlue) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .purple) ||
+                                              (FFAppState().ButtonColor ==
+                                                  FlutterFlowTheme.of(context)
+                                                      .pink)
+                                          ? FlutterFlowTheme.of(context).white
+                                          : FlutterFlowTheme.of(context)
+                                              .primaryText,
                                       letterSpacing: 0.0,
                                     ),
                                 elevation: 0.0,
+                                borderSide: BorderSide(
+                                  color: FFAppState().BorderColor,
+                                  width: 2.0,
+                                ),
                                 borderRadius: BorderRadius.circular(25.0),
                               ),
                             ),
@@ -331,14 +409,34 @@ class _SetProfilePictureWidgetState extends State<SetProfilePictureWidget> {
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: 'Lato',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                ),
+                        color: FFAppState().ButtonColor,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .titleMedium
+                            .override(
+                              fontFamily: 'Lato',
+                              color: (FFAppState().ButtonColor ==
+                                          FlutterFlowTheme.of(context).black) ||
+                                      (FFAppState().ButtonColor ==
+                                          FlutterFlowTheme.of(context).redd) ||
+                                      (FFAppState().ButtonColor ==
+                                          FlutterFlowTheme.of(context).green) ||
+                                      (FFAppState().ButtonColor ==
+                                          FlutterFlowTheme.of(context)
+                                              .realBlue) ||
+                                      (FFAppState().ButtonColor ==
+                                          FlutterFlowTheme.of(context)
+                                              .purple) ||
+                                      (FFAppState().ButtonColor ==
+                                          FlutterFlowTheme.of(context).pink)
+                                  ? FlutterFlowTheme.of(context).white
+                                  : FlutterFlowTheme.of(context).primaryText,
+                              letterSpacing: 0.0,
+                            ),
                         elevation: 2.0,
+                        borderSide: BorderSide(
+                          color: FFAppState().BorderColor,
+                          width: 2.0,
+                        ),
                         borderRadius: BorderRadius.circular(25.0),
                       ),
                     ),
