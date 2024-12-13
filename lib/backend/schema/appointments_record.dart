@@ -46,11 +46,6 @@ class AppointmentsRecord extends FirestoreRecord {
   bool get isAllDay => _isAllDay ?? false;
   bool hasIsAllDay() => _isAllDay != null;
 
-  // "monthly" field.
-  bool? _monthly;
-  bool get monthly => _monthly ?? false;
-  bool hasMonthly() => _monthly != null;
-
   // "weekly" field.
   bool? _weekly;
   bool get weekly => _weekly ?? false;
@@ -61,6 +56,11 @@ class AppointmentsRecord extends FirestoreRecord {
   Color? get color => _color;
   bool hasColor() => _color != null;
 
+  // "daily" field.
+  bool? _daily;
+  bool get daily => _daily ?? false;
+  bool hasDaily() => _daily != null;
+
   void _initializeFields() {
     _userID = snapshotData['userID'] as String?;
     _eventName = snapshotData['eventName'] as String?;
@@ -68,9 +68,9 @@ class AppointmentsRecord extends FirestoreRecord {
     _endTime = snapshotData['endTime'] as DateTime?;
     _eventDescription = snapshotData['eventDescription'] as String?;
     _isAllDay = snapshotData['isAllDay'] as bool?;
-    _monthly = snapshotData['monthly'] as bool?;
     _weekly = snapshotData['weekly'] as bool?;
     _color = getSchemaColor(snapshotData['color']);
+    _daily = snapshotData['daily'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -114,9 +114,9 @@ Map<String, dynamic> createAppointmentsRecordData({
   DateTime? endTime,
   String? eventDescription,
   bool? isAllDay,
-  bool? monthly,
   bool? weekly,
   Color? color,
+  bool? daily,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -126,9 +126,9 @@ Map<String, dynamic> createAppointmentsRecordData({
       'endTime': endTime,
       'eventDescription': eventDescription,
       'isAllDay': isAllDay,
-      'monthly': monthly,
       'weekly': weekly,
       'color': color,
+      'daily': daily,
     }.withoutNulls,
   );
 
@@ -147,9 +147,9 @@ class AppointmentsRecordDocumentEquality
         e1?.endTime == e2?.endTime &&
         e1?.eventDescription == e2?.eventDescription &&
         e1?.isAllDay == e2?.isAllDay &&
-        e1?.monthly == e2?.monthly &&
         e1?.weekly == e2?.weekly &&
-        e1?.color == e2?.color;
+        e1?.color == e2?.color &&
+        e1?.daily == e2?.daily;
   }
 
   @override
@@ -160,9 +160,9 @@ class AppointmentsRecordDocumentEquality
         e?.endTime,
         e?.eventDescription,
         e?.isAllDay,
-        e?.monthly,
         e?.weekly,
-        e?.color
+        e?.color,
+        e?.daily
       ]);
 
   @override

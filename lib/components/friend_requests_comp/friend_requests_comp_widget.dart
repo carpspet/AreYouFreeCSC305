@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'friend_requests_comp_model.dart';
 export 'friend_requests_comp_model.dart';
 
@@ -43,6 +44,8 @@ class _FriendRequestsCompWidgetState extends State<FriendRequestsCompWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -91,14 +94,27 @@ class _FriendRequestsCompWidgetState extends State<FriendRequestsCompWidget> {
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: FlutterFlowIconButton(
-                        borderColor: const Color(0xFFFF0D00),
+                        borderColor: FFAppState().BorderColor,
                         borderRadius: 8.0,
+                        borderWidth: 2.0,
                         buttonSize: 40.0,
-                        fillColor:
-                            FlutterFlowTheme.of(context).primaryBackground,
+                        fillColor: FFAppState().ButtonColor,
                         icon: Icon(
                           Icons.close,
-                          color: FlutterFlowTheme.of(context).primaryText,
+                          color: (FFAppState().ButtonColor ==
+                                      FlutterFlowTheme.of(context).black) ||
+                                  (FFAppState().ButtonColor ==
+                                      FlutterFlowTheme.of(context).redd) ||
+                                  (FFAppState().ButtonColor ==
+                                      FlutterFlowTheme.of(context).green) ||
+                                  (FFAppState().ButtonColor ==
+                                      FlutterFlowTheme.of(context).realBlue) ||
+                                  (FFAppState().ButtonColor ==
+                                      FlutterFlowTheme.of(context).purple) ||
+                                  (FFAppState().ButtonColor ==
+                                      FlutterFlowTheme.of(context).pink)
+                              ? FlutterFlowTheme.of(context).white
+                              : FlutterFlowTheme.of(context).primaryText,
                           size: 24.0,
                         ),
                         onPressed: () async {
@@ -270,22 +286,41 @@ class _FriendRequestsCompWidgetState extends State<FriendRequestsCompWidget> {
                                   16.0, 0.0, 16.0, 0.0),
                               iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                              color: FFAppState().ButtonColor,
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
                                     fontFamily: 'Lato',
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
+                                    color:
+                                        (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .black) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .redd) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .green) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .realBlue) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .purple) ||
+                                                (FFAppState().ButtonColor ==
+                                                    FlutterFlowTheme.of(context)
+                                                        .pink)
+                                            ? FlutterFlowTheme.of(context).white
+                                            : FlutterFlowTheme.of(context)
+                                                .primaryText,
                                     letterSpacing: 0.0,
                                   ),
                               elevation: 0.0,
-                              borderSide: const BorderSide(
-                                color: Color(0x6439D2C0),
+                              borderSide: BorderSide(
+                                color: FFAppState().BorderColor,
                                 width: 2.0,
                               ),
-                              borderRadius: BorderRadius.circular(12.0),
+                              borderRadius: BorderRadius.circular(18.0),
                             ),
                           ),
                         ),

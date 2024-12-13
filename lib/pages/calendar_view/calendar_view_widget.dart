@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'calendar_view_model.dart';
 export 'calendar_view_model.dart';
 
@@ -30,6 +31,7 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
     super.initState();
     _model = createModel(context, () => CalendarViewModel());
 
+    _model.switchValue = FFAppState().groupCalendar;
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -42,8 +44,13 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -53,39 +60,116 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      if (widget.selectedDay != getCurrentTimestamp) {
-                        FFAppState().selectedDate = widget.selectedDay;
-                        safeSetState(() {});
-                      }
+                if (FFAppState().groupCalendar)
+                  Align(
+                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                      child: Stack(
+                        alignment: const AlignmentDirectional(1.0, 1.0),
+                        children: [
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: SizedBox(
+                              width: double.infinity,
+                              height: 745.0,
+                              child: custom_widgets.GroupCalendar(
+                                width: double.infinity,
+                                height: 745.0,
+                                groupName: FFAppState().groupName,
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: const AlignmentDirectional(1.0, 0.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  335.0, 0.0, 0.0, 10.0),
+                              child: Container(
+                                width: 75.0,
+                                height: 75.0,
+                                decoration: const BoxDecoration(),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Groups',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lato',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    Switch.adaptive(
+                                      value: _model.switchValue!,
+                                      onChanged: (newValue) async {
+                                        safeSetState(() =>
+                                            _model.switchValue = newValue);
 
-                      context.pushNamed('CalendarView');
-                    },
-                    child: const SizedBox(
-                      width: 400.0,
-                      height: 750.0,
-                      child: custom_widgets.SyncfusionCalendar(
-                        width: 400.0,
-                        height: 750.0,
+                                        if (!newValue) {
+                                          FFAppState().groupCalendar = false;
+                                          safeSetState(() {});
+                                        }
+                                      },
+                                      activeColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      activeTrackColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      inactiveTrackColor:
+                                          FlutterFlowTheme.of(context)
+                                              .alternate,
+                                      inactiveThumbColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                ),
+                if (!FFAppState().groupCalendar)
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        if (widget.selectedDay != getCurrentTimestamp) {
+                          FFAppState().selectedDate = widget.selectedDay;
+                          safeSetState(() {});
+                        }
+
+                        context.pushNamed('CalendarView');
+                      },
+                      child: const SizedBox(
+                        width: double.infinity,
+                        height: 745.0,
+                        child: custom_widgets.SyncfusionCalendar(
+                          width: double.infinity,
+                          height: 745.0,
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
             Container(
               width: MediaQuery.sizeOf(context).width * 1.0,
               height: 52.0,
-              decoration: const BoxDecoration(
-                color: Color(0xFF7BC3E2),
-                boxShadow: [
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).blue,
+                boxShadow: const [
                   BoxShadow(
                     blurRadius: 4.0,
                     color: Color(0x11000000),
@@ -95,7 +179,7 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
                     ),
                   )
                 ],
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(20.0),
                   bottomRight: Radius.circular(20.0),
                   topLeft: Radius.circular(0.0),
@@ -150,8 +234,11 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
                                       context: context,
                                       builder: (context) {
                                         return GestureDetector(
-                                          onTap: () =>
-                                              FocusScope.of(context).unfocus(),
+                                          onTap: () {
+                                            FocusScope.of(context).unfocus();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                          },
                                           child: Padding(
                                             padding: MediaQuery.viewInsetsOf(
                                                 context),
@@ -188,8 +275,11 @@ class _CalendarViewWidgetState extends State<CalendarViewWidget> {
                                 context: context,
                                 builder: (context) {
                                   return GestureDetector(
-                                    onTap: () =>
-                                        FocusScope.of(context).unfocus(),
+                                    onTap: () {
+                                      FocusScope.of(context).unfocus();
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                    },
                                     child: Padding(
                                       padding: MediaQuery.viewInsetsOf(context),
                                       child: const NewEventWidget(),

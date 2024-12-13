@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'update_email_model.dart';
 export 'update_email_model.dart';
 
@@ -84,6 +85,8 @@ class _UpdateEmailWidgetState extends State<UpdateEmailWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return BackdropFilter(
       filter: ImageFilter.blur(
         sigmaX: 5.0,
@@ -230,12 +233,12 @@ class _UpdateEmailWidgetState extends State<UpdateEmailWidget>
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.normal,
                                         ),
-                                    enabledBorder: const UnderlineInputBorder(
+                                    enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFFE0E3E7),
+                                        color: FFAppState().BorderColor,
                                         width: 2.0,
                                       ),
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                         topLeft: Radius.circular(4.0),
                                         topRight: Radius.circular(4.0),
                                       ),
@@ -351,22 +354,53 @@ class _UpdateEmailWidgetState extends State<UpdateEmailWidget>
                                           iconPadding:
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
-                                          color: const Color(0xFF4B39EF),
+                                          color: FFAppState().ButtonColor,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .titleSmall
                                                   .override(
                                                     fontFamily:
                                                         'Plus Jakarta Sans',
-                                                    color: Colors.white,
+                                                    color: (FFAppState().ButtonColor == FlutterFlowTheme.of(context).black) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .redd) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .green) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .realBlue) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .purple) ||
+                                                            (FFAppState()
+                                                                    .ButtonColor ==
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .pink)
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .white
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
                                                     fontSize: 16.0,
                                                     letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                           elevation: 2.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
+                                          borderSide: BorderSide(
+                                            color: FFAppState().BorderColor,
+                                            width: 2.0,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(40.0),

@@ -10,6 +10,7 @@ import 'schema/friend_requests_record.dart';
 import 'schema/appointments_record.dart';
 import 'schema/groups_record.dart';
 import 'schema/display_name_in_use_record.dart';
+import 'schema/themes_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -23,6 +24,7 @@ export 'schema/friend_requests_record.dart';
 export 'schema/appointments_record.dart';
 export 'schema/groups_record.dart';
 export 'schema/display_name_in_use_record.dart';
+export 'schema/themes_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -204,6 +206,43 @@ Future<List<DisplayNameInUseRecord>> queryDisplayNameInUseRecordOnce({
     queryCollectionOnce(
       DisplayNameInUseRecord.collection,
       DisplayNameInUseRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ThemesRecords (as a Stream and as a Future).
+Future<int> queryThemesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ThemesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ThemesRecord>> queryThemesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ThemesRecord.collection,
+      ThemesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ThemesRecord>> queryThemesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ThemesRecord.collection,
+      ThemesRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

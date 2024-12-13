@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -13,12 +14,29 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      _BorderColor =
+          _colorFromIntValue(prefs.getInt('ff_BorderColor')) ?? _BorderColor;
+    });
+    _safeInit(() {
+      _ButtonColor =
+          _colorFromIntValue(prefs.getInt('ff_ButtonColor')) ?? _ButtonColor;
+    });
+    _safeInit(() {
+      _BackgroundColor =
+          _colorFromIntValue(prefs.getInt('ff_BackgroundColor')) ??
+              _BackgroundColor;
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
+
+  late SharedPreferences prefs;
 
   String _pendingStatus = '';
   String get pendingStatus => _pendingStatus;
@@ -150,9 +168,79 @@ class FFAppState extends ChangeNotifier {
     _dayText = value;
   }
 
-  String _BackgroundTheme = '';
-  String get BackgroundTheme => _BackgroundTheme;
-  set BackgroundTheme(String value) {
-    _BackgroundTheme = value;
+  bool _daily = false;
+  bool get daily => _daily;
+  set daily(bool value) {
+    _daily = value;
   }
+
+  String _groupName = '';
+  String get groupName => _groupName;
+  set groupName(String value) {
+    _groupName = value;
+  }
+
+  Color _BorderColor = const Color(0xcfa839ef);
+  Color get BorderColor => _BorderColor;
+  set BorderColor(Color value) {
+    _BorderColor = value;
+    prefs.setInt('ff_BorderColor', value.value);
+  }
+
+  Color _ButtonColor = const Color(0xfff1f4f8);
+  Color get ButtonColor => _ButtonColor;
+  set ButtonColor(Color value) {
+    _ButtonColor = value;
+    prefs.setInt('ff_ButtonColor', value.value);
+  }
+
+  Color _BackgroundColor = const Color(0xfff1f4f8);
+  Color get BackgroundColor => _BackgroundColor;
+  set BackgroundColor(Color value) {
+    _BackgroundColor = value;
+    prefs.setInt('ff_BackgroundColor', value.value);
+  }
+
+  bool _groupCalendar = false;
+  bool get groupCalendar => _groupCalendar;
+  set groupCalendar(bool value) {
+    _groupCalendar = value;
+  }
+
+  String _groupNameTab = '';
+  String get groupNameTab => _groupNameTab;
+  set groupNameTab(String value) {
+    _groupNameTab = value;
+  }
+
+  bool _timePicked1 = false;
+  bool get timePicked1 => _timePicked1;
+  set timePicked1(bool value) {
+    _timePicked1 = value;
+  }
+
+  bool _timePicked2 = false;
+  bool get timePicked2 => _timePicked2;
+  set timePicked2(bool value) {
+    _timePicked2 = value;
+  }
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
+}
+
+Color? _colorFromIntValue(int? val) {
+  if (val == null) {
+    return null;
+  }
+  return Color(val);
 }

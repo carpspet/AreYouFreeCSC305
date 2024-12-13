@@ -35,7 +35,10 @@ class _TestWidgetState extends State<TestWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -62,10 +65,10 @@ class _TestWidgetState extends State<TestWidget> {
             children: [
               SizedBox(
                 width: double.infinity,
-                height: 600.0,
-                child: custom_widgets.SyncfusionCalendar(
+                height: 700.0,
+                child: custom_widgets.SyncfusionTest(
                   width: double.infinity,
-                  height: 600.0,
+                  height: 700.0,
                 ),
               ),
             ],

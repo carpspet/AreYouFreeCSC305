@@ -1,4 +1,4 @@
-import '/auth/firebase_auth/auth_util.dart';
+import '/components/group_list_comp/group_list_comp_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -252,18 +252,57 @@ class _SettingsWidgetState extends State<SettingsWidget>
                       ),
                     ],
                   ),
-                  Text(
-                    'Groups',
-                    style: FlutterFlowTheme.of(context).titleMedium.override(
-                          fontFamily: 'Lato',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
-                  Container(
-                    height: 81.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      borderRadius: BorderRadius.circular(8.0),
+                  FFButtonWidget(
+                    onPressed: () async {
+                      await showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        enableDrag: false,
+                        context: context,
+                        builder: (context) {
+                          return Padding(
+                            padding: MediaQuery.viewInsetsOf(context),
+                            child: const GroupListCompWidget(),
+                          );
+                        },
+                      ).then((value) => safeSetState(() {}));
+                    },
+                    text: 'View your groups',
+                    options: FFButtonOptions(
+                      width: double.infinity,
+                      height: 40.0,
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      iconPadding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FFAppState().ButtonColor,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Lato',
+                            color: (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).black) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).redd) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).green) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context)
+                                            .realBlue) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).purple) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).pink)
+                                ? FlutterFlowTheme.of(context).white
+                                : FlutterFlowTheme.of(context).primaryText,
+                            letterSpacing: 0.0,
+                          ),
+                      elevation: 0.0,
+                      borderSide: BorderSide(
+                        color: FFAppState().BorderColor,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(18.0),
                     ),
                   ),
                   FFButtonWidget(
@@ -273,70 +312,81 @@ class _SettingsWidgetState extends State<SettingsWidget>
                     text: 'Friends',
                     options: FFButtonOptions(
                       width: double.infinity,
-                      height: 30.0,
+                      height: 40.0,
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).secondary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lato',
-                                color: FlutterFlowTheme.of(context).info,
-                                letterSpacing: 0.0,
-                              ),
+                      color: FFAppState().ButtonColor,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Lato',
+                            color: (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).black) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).redd) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).green) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context)
+                                            .realBlue) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).purple) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).pink)
+                                ? FlutterFlowTheme.of(context).white
+                                : FlutterFlowTheme.of(context).primaryText,
+                            letterSpacing: 0.0,
+                          ),
                       elevation: 0.0,
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
-                    },
-                    text: 'Themes',
-                    options: FFButtonOptions(
-                      width: double.infinity,
-                      height: 30.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).tertiary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lato',
-                                color: FlutterFlowTheme.of(context).info,
-                                letterSpacing: 0.0,
-                              ),
-                      elevation: 0.0,
-                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: FFAppState().BorderColor,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(18.0),
                     ),
                   ),
                   FFButtonWidget(
                     onPressed: () async {
-                      GoRouter.of(context).prepareAuthEvent();
-                      await authManager.signOut();
-                      GoRouter.of(context).clearRedirectLocation();
-
-                      context.goNamedAuth('SignUpLogIn', context.mounted);
+                      context.pushNamed('CustomizeColorsPage');
                     },
-                    text: 'Logout',
+                    text: 'Themes',
                     options: FFButtonOptions(
                       width: double.infinity,
-                      height: 30.0,
+                      height: 40.0,
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).error,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lato',
-                                color: FlutterFlowTheme.of(context).info,
-                                letterSpacing: 0.0,
-                              ),
+                      color: FFAppState().ButtonColor,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Lato',
+                            color: (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).black) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).redd) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).green) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context)
+                                            .realBlue) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).purple) ||
+                                    (FFAppState().ButtonColor ==
+                                        FlutterFlowTheme.of(context).pink)
+                                ? FlutterFlowTheme.of(context).white
+                                : FlutterFlowTheme.of(context).primaryText,
+                            letterSpacing: 0.0,
+                          ),
                       elevation: 0.0,
-                      borderRadius: BorderRadius.circular(8.0),
+                      borderSide: BorderSide(
+                        color: FFAppState().BorderColor,
+                        width: 2.0,
+                      ),
+                      borderRadius: BorderRadius.circular(18.0),
                     ),
                   ),
                 ].divide(const SizedBox(height: 16.0)),

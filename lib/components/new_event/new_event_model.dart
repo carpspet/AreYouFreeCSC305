@@ -1,7 +1,5 @@
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'new_event_widget.dart' show NewEventWidget;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NewEventModel extends FlutterFlowModel<NewEventWidget> {
@@ -24,12 +22,6 @@ class NewEventModel extends FlutterFlowModel<NewEventWidget> {
   FocusNode? eventDescFocusNode;
   TextEditingController? eventDescTextController;
   String? Function(BuildContext, String?)? eventDescTextControllerValidator;
-  // State field(s) for GroupName widget.
-  FocusNode? groupNameFocusNode;
-  TextEditingController? groupNameTextController;
-  String? Function(BuildContext, String?)? groupNameTextControllerValidator;
-  // Stores action output result for [Firestore Query - Query a collection] action in Button widget.
-  List<GroupsRecord>? boolGroupName;
   // State field(s) for Checkbox widget.
   bool? checkboxValue4;
 
@@ -43,8 +35,5 @@ class NewEventModel extends FlutterFlowModel<NewEventWidget> {
 
     eventDescFocusNode?.dispose();
     eventDescTextController?.dispose();
-
-    groupNameFocusNode?.dispose();
-    groupNameTextController?.dispose();
   }
 }

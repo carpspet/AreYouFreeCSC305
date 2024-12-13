@@ -44,13 +44,11 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
     super.initState();
     fetchAppointmentsFromFirebase();
 
-    // Initialize the App State Variables with the current date
     final currentDate = DateTime.now();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateHeaderText(currentDate);
     });
 
-    // Add a listener to update the header whenever the display date changes
     _calendarController.addPropertyChangedListener(_onCalendarPropertyChanged);
   }
 
@@ -80,9 +78,29 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
     }
 
     try {
+      // Fetch the current user's display_name from the users collection
+      final userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
+
+      if (!userSnapshot.exists) {
+        print("No user document found for the current user.");
+        return;
+      }
+
+      final userData = userSnapshot.data() as Map<String, dynamic>;
+      final String? displayName = userData['display_name'];
+
+      if (displayName == null || displayName.isEmpty) {
+        print("Display name not found for the current user.");
+        return;
+      }
+
+      // Query the appointments collection using the display_name as userID
       final snapshot = await FirebaseFirestore.instance
           .collection('appointments')
-          .where('userID', isEqualTo: currentUser.uid)
+          .where('userID', isEqualTo: displayName)
           .get();
 
       for (var doc in snapshot.docs) {
@@ -91,15 +109,52 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
         DateTime startTime = (data['eventTime'] as Timestamp).toDate();
         DateTime endTime = (data['endTime'] as Timestamp).toDate();
         String eventName = data['eventName'] ?? 'No Title';
+        String eventDescription = data['eventDescription'] ?? '';
         bool isAllDay = data['isAllDay'] ?? false;
+        bool isDaily = data['daily'] ?? false;
+        bool isWeekly = data['weekly'] ?? false;
+        Color appointmentColor;
+        if (data['color'] != null && data['color'] is String) {
+          try {
+            appointmentColor = _hexToColor(data['color']);
+          } catch (e) {
+            print("Invalid color format in database, defaulting to blue");
+            appointmentColor = Colors.blue; // Default blue color
+          }
+        } else {
+          appointmentColor = Colors.blue; // Default blue color
+        }
+
+        String? recurrenceRule;
+
+        // Define recurrence rules based on daily and weekly flags
+        if (isDaily) {
+          recurrenceRule = 'FREQ=DAILY;INTERVAL=1';
+        } else if (isWeekly) {
+          // Determine the day of the week for the event
+          final weekdayAbbreviations = [
+            'SU',
+            'MO',
+            'TU',
+            'WE',
+            'TH',
+            'FR',
+            'SA'
+          ]; // Sunday to Saturday
+          String eventWeekday = weekdayAbbreviations[startTime.weekday % 7];
+
+          // Set the recurrence rule for the specific day of the week
+          recurrenceRule = 'FREQ=WEEKLY;BYDAY=$eventWeekday;INTERVAL=1';
+        }
 
         meetings.add(Appointment(
           startTime: startTime,
           endTime: endTime,
-          subject: eventName,
+          subject: "$eventName\n$eventDescription",
           notes: doc.id,
           isAllDay: isAllDay,
-          color: Colors.blue,
+          color: appointmentColor,
+          recurrenceRule: recurrenceRule,
         ));
       }
 
@@ -109,6 +164,14 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
     } catch (e) {
       print("Error fetching appointments from Firebase: $e");
     }
+  }
+
+  Color _hexToColor(String hexColor) {
+    hexColor = hexColor.replaceAll("#", ""); // Remove "#" if it exists
+    if (hexColor.length == 6) {
+      hexColor = "FF$hexColor"; // Add full opacity if alpha is not specified
+    }
+    return Color(int.parse("0x$hexColor"));
   }
 
   void _updateHeaderText(DateTime date) {
@@ -177,7 +240,6 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Custom Header for Month and Year
         Container(
           color: Colors.blue,
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
@@ -223,8 +285,6 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
             ],
           ),
         ),
-
-        // Custom Header for Day
         Container(
           color: Colors.blue,
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
@@ -268,14 +328,12 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
             ],
           ),
         ),
-
-        // Calendar View
         Expanded(
           child: SfCalendar(
             controller: _calendarController,
             view: CalendarView.week,
-            headerHeight: 0, // Disable built-in header
-            viewHeaderHeight: 0, // Disable built-in view header
+            headerHeight: 0,
+            viewHeaderHeight: 0,
             showCurrentTimeIndicator: true,
             dataSource: _dataSource,
             timeSlotViewSettings: const TimeSlotViewSettings(
@@ -290,6 +348,73 @@ class _SyncfusionCalendarState extends State<SyncfusionCalendar> {
                 color: Colors.blue,
               ),
             ),
+            appointmentBuilder:
+                (BuildContext context, CalendarAppointmentDetails details) {
+              final Appointment appointment = details.appointments.first;
+
+              return GestureDetector(
+                onTap: () async {
+                  try {
+                    final String? eventID = appointment.notes;
+
+                    if (eventID != null) {
+                      // Navigate to the edit event screen with the event ID
+                      context.pushNamed(
+                        'editEvent',
+                        queryParameters: {'eventID': eventID},
+                      );
+                      print('Navigated to editEvent with eventID: $eventID');
+                    } else {
+                      print('Event ID is null for the selected appointment.');
+                    }
+                  } catch (e, stackTrace) {
+                    print('Error while opening editEvent: $e');
+                    print(stackTrace);
+                  }
+                },
+                child: Container(
+                  color: appointment.color, // Use the appointment's color
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Only show the event name for all-day events
+                      if (appointment.isAllDay)
+                        Text(
+                          appointment.subject.split('\n')[0], // Event name
+                          style: const TextStyle(
+                            fontSize: 14, // Slightly smaller font size
+                            fontWeight: FontWeight.bold, // Bold event name
+                            color:
+                                Colors.white, // White text for better contrast
+                          ),
+                        ),
+                      if (!appointment.isAllDay) ...[
+                        Text(
+                          appointment.subject.split('\n')[0], // Event name
+                          style: const TextStyle(
+                            fontSize: 14, // Bigger font size for event name
+                            fontWeight: FontWeight.bold, // Bold event name
+                            color: Colors.white, // White text for contrast
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          appointment.subject.split('\n').length > 1
+                              ? appointment.subject.split('\n')[1]
+                              : '', // Subject/description
+                          style: const TextStyle(
+                            fontSize: 12, // Smaller font size for description
+                            color: Colors.white, // Less visible grey color
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ],
